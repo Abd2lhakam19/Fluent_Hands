@@ -13,5 +13,6 @@ class AppStrings {
       email = "Email",
       password = "Password",
       confirmPassword = "Confirm Password",
-      alreadyHave = "Already have an account? ";
+      alreadyHave = "Already have an account? ",
+      forgetPassword = "Forget Password";
 }
