@@ -2,6 +2,7 @@ import 'package:fluent_hands/core/helper/app_assets.dart';
 import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/core/widgets/button_widget.dart';
+import 'package:fluent_hands/features/sign_up/ui/main_ui/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -21,7 +22,16 @@ class OnBoarding2 extends StatelessWidget {
             const Gap(96),
             SvgPicture.asset(AppAssets.onBoarding3),
             const Gap(64),
-            ButtonWidget(onPressed: () {}, text: AppStrings.signUp),
+            ButtonWidget(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignUp(),
+                    ),
+                  );
+                },
+                text: AppStrings.signUp),
             const Gap(16),
             ButtonWidget(
               onPressed: () {},

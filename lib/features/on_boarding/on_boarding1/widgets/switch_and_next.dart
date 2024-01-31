@@ -1,4 +1,4 @@
-import 'package:fluent_hands/core/routing/routes.dart';
+import 'package:fluent_hands/features/on_boarding/on_boarding2/main_ui/on_boarding2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -23,7 +23,7 @@ class SwitchAndNext extends StatelessWidget {
             (index) => Padding(
               padding: EdgeInsets.symmetric(horizontal: 4.w),
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 200),
                 height: 8.h,
                 width: currentPage == index ? 24.w : 8.w,
                 decoration: BoxDecoration(
@@ -37,10 +37,13 @@ class SwitchAndNext extends StatelessWidget {
         ),
         const Gap(110),
         ButtonWidget(
-            onPressed: () {
-              Navigator.of(context).pushReplacementNamed(Routes.onBoarding2);
-            },
-            text: AppStrings.next),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => const OnBoarding2(),
+            ));
+          },
+          text: AppStrings.next,
+        ),
         const Gap(40),
       ],
     );
