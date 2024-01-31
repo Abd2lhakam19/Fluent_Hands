@@ -10,6 +10,12 @@ class TextStyles {
         color: AppColors.blueBerry,
         fontFamily: 'montserrat',
       ),
+      semibold18BlueBerry = TextStyle(
+        fontSize: 18.sp,
+        fontWeight: FontWeightHelper.semiBold,
+        color: AppColors.blueBerry,
+        fontFamily: 'montserrat',
+      ),
       bold14BlueBerry = TextStyle(
         fontSize: 14.sp,
         fontWeight: FontWeightHelper.bold,
@@ -36,6 +42,12 @@ class TextStyles {
       ),
       regular16orange = TextStyle(
         fontSize: 16.sp,
+        fontWeight: FontWeightHelper.regular,
+        color: AppColors.orangeColor,
+        fontFamily: 'montserrat',
+      ),
+      regular13orange = TextStyle(
+        fontSize: 13.sp,
         fontWeight: FontWeightHelper.regular,
         color: AppColors.orangeColor,
         fontFamily: 'montserrat',
