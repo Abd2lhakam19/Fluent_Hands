@@ -37,10 +37,13 @@ class SwitchAndNext extends StatelessWidget {
         ),
         const Gap(110),
         ButtonWidget(
-            onPressed: () {
-              Navigator.of(context).pushReplacementNamed(Routes.onBoarding2);
-            },
-            text: AppStrings.next),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => const OnBoarding2(),
+            ));
+          },
+          text: AppStrings.next,
+        ),
         const Gap(40),
       ],
     );
