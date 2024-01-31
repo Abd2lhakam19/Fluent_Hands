@@ -21,5 +21,29 @@ class TextStyles {
         fontWeight: FontWeightHelper.medium,
         color: AppColors.blueBerry,
         fontFamily: 'montserrat',
+      ),
+      regular18BlueBerry = TextStyle(
+        fontSize: 18.sp,
+        fontWeight: FontWeightHelper.regular,
+        color: AppColors.blueBerry,
+        fontFamily: 'montserrat',
+      ),
+      regular16BlueBerry = TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeightHelper.regular,
+        color: AppColors.blueBerry,
+        fontFamily: 'montserrat',
+      ),
+      regular16orange = TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeightHelper.regular,
+        color: AppColors.orangeColor,
+        fontFamily: 'montserrat',
+      ),
+      medium16BlueBerry = TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeightHelper.regular,
+        color: AppColors.blueBerry,
+        fontFamily: 'montserrat',
       );
 }

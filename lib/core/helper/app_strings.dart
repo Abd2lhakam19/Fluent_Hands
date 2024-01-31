@@ -6,7 +6,12 @@ class AppStrings {
       learning = "Learning",
       speakWithoutWords =
           "Speak without words, but with a powerful language. Experience the beauty of communication.",
-      signUp = "Sign up",
-      signIn = "Sign in",
-      continueAsAguest = "Continue as a guest";
+      signUp = "Sign Up",
+      signIn = "Sign In",
+      continueAsAguest = "Continue as a guest",
+      name = "Name",
+      email = "Email",
+      password = "Password",
+      confirmPassword = "Confirm Password",
+      alreadyHave = "Already have an account? ";
 }

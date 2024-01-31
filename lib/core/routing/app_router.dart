@@ -1,6 +1,7 @@
 import 'package:fluent_hands/core/routing/routes.dart';
 import 'package:fluent_hands/features/on_boarding/on_boarding1/main_ui/on_boarding1.dart';
 import 'package:fluent_hands/features/on_boarding/on_boarding2/main_ui/on_boarding2.dart';
+import 'package:fluent_hands/features/sign_up/ui/main_ui/sign_up.dart';
 import 'package:fluent_hands/features/splash_screen/ui/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,16 +20,18 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const OnBoarding2(),
         );
-      default:
+      case Routes.signUp:
         return MaterialPageRoute(
-          builder: (context) => const MaterialApp(
-            home: Scaffold(
-              body: Center(
-                child: Text("Not Found"),
-              ),
-            ),
-          ),
+          builder: (context) => const SignUp(),
         );
+      default:
     }
+    return MaterialPageRoute(
+      builder: (context) => const Scaffold(
+        body: Center(
+          child: Text("Not Found"),
+        ),
+      ),
+    );
   }
 }
