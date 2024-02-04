@@ -4,6 +4,7 @@ import 'package:fluent_hands/core/theming/text_styles.dart';
 import 'package:fluent_hands/core/widgets/button_widget.dart';
 import 'package:fluent_hands/features/sign_up/ui/widgets/already_have.dart';
 import 'package:fluent_hands/features/sign_up/ui/widgets/forms.dart';
+import 'package:fluent_hands/layout/app_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -37,7 +38,15 @@ class _SignUpState extends State<SignUp> {
               const Gap(24),
               const TextForms(),
               const Gap(24),
-              ButtonWidget(onPressed: () {}, text: AppStrings.signUp),
+              ButtonWidget(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const AppLayout(),
+                      ),
+                    );
+                  },
+                  text: AppStrings.signUp),
               const Gap(16),
               const AlreadyHave(),
             ],

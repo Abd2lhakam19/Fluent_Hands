@@ -4,14 +4,14 @@ import 'package:gap/gap.dart';
 
 import '../../../../core/widgets/text_field.dart';
 
-class signInForms extends StatefulWidget {
-  const signInForms({super.key});
+class SignInForms extends StatefulWidget {
+  const SignInForms({super.key});
 
   @override
-  State<signInForms> createState() => _signInFormsState();
+  State<SignInForms> createState() => _SignInFormsState();
 }
 
-class _signInFormsState extends State<signInForms> {
+class _SignInFormsState extends State<SignInForms> {
   final formKey = GlobalKey<FormState>();
   bool isOpscure = true;
   @override
