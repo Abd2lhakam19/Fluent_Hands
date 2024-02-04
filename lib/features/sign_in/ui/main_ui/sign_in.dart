@@ -7,7 +7,6 @@ import 'package:gap/gap.dart';
 
 import '../../../../core/helper/app_assets.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../sign_up/ui/widgets/forms.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -35,7 +34,7 @@ class _SignInState extends State<SignIn> {
               const Gap(8),
               SvgPicture.asset(AppAssets.signUp),
               const Gap(24),
-              const signInForms(),
+              const SignInForms(),
               const Gap(10),
               Text(AppStrings.forgetPassword,
                   style: TextStyles.regular13orange, textAlign: TextAlign.end),

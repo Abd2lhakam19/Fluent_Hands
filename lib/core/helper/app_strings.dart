@@ -14,5 +14,9 @@ class AppStrings {
       password = "Password",
       confirmPassword = "Confirm Password",
       alreadyHave = "Already have an account? ",
-      forgetPassword = "Forget Password";
+      forgetPassword = "Forget Password",
+      home = "Home",
+      learn = "Learn",
+      profile = "Profile",
+      settings = "Settings";
 }
