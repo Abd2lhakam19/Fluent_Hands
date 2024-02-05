@@ -12,4 +12,5 @@ class AppAssets {
       profileSelected = "assets/images/profile_selected.png",
       settings = "assets/images/settings.png",
       settingsSelected = "assets/images/settings_selected.png";
+
 }
