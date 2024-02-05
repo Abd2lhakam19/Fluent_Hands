@@ -3,5 +3,6 @@ class AppAssets {
       onBoarding1 = "assets/svg/onBoarding1.svg",
       onBoarding2 = "assets/svg/onBoarding2.svg",
       onBoarding3 = "assets/svg/onBoarding3.svg",
-      signUp = "assets/svg/signUp.svg";
+      signUp = "assets/svg/signUp.svg",
+      googleIcon = "assets/images/google.png";
 }

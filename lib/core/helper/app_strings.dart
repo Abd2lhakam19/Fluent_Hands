@@ -14,5 +14,7 @@ class AppStrings {
       password = "Password",
       confirmPassword = "Confirm Password",
       alreadyHave = "Already have an account? ",
-      forgetPassword = "Forget Password";
+      forgetPassword = "Forget Password",
+      dontHaveAccount = "Don't have any account? ",
+      orSingInWith = "Or sign in with :";
 }
