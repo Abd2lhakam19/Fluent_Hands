@@ -8,6 +8,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../core/helper/app_assets.dart';
 import '../../../../core/theming/text_styles.dart';
+import '../../../../core/widgets/button_widget.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -57,7 +58,7 @@ class _SignInState extends State<SignIn> {
               ),
               const Gap(24),
               Text(
-                AppStrings.orSingInWith,
+                AppStrings.orSignInWith,
                 style: TextStyles.semibold18BlueBerry,
                 textAlign: TextAlign.center,
               ),

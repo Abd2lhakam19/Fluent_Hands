@@ -18,5 +18,7 @@ class AppStrings {
       home = "Home",
       learn = "Learn",
       profile = "Profile",
-      settings = "Settings";
+      settings = "Settings",
+      orSignInWith = "Or sign in with :",
+      dontHaveAccount = "Don't have any account? ";
 }
