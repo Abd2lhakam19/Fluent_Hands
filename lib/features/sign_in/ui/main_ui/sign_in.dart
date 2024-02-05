@@ -54,6 +54,7 @@ class _SignInState extends State<SignIn> {
               const Divider(
                 indent: 48,
                 endIndent: 48,
+                thickness: 2,
               ),
               const Gap(24),
               Text(
@@ -61,8 +62,14 @@ class _SignInState extends State<SignIn> {
                 style: TextStyles.semibold18BlueBerry,
                 textAlign: TextAlign.center,
               ),
-              const Gap(8),
-              ImageIcon(AssetImage(AppAssets.googleIcon))
+              const Gap(16),
+              SizedBox(
+                width: 24.w,
+                height: 24.h,
+                child: Image.asset(
+                  AppAssets.googleIcon,
+                ),
+              )
             ],
           ),
         ),
