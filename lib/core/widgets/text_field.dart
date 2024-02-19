@@ -13,6 +13,7 @@ class TextFieldWidget extends StatelessWidget {
   String hintText;
   bool? isOpscure;
   Widget? suffixIcon;
+  TextEditingController? controller;
   TextFieldWidget(
       {super.key,
       this.hintStyle,
@@ -22,7 +23,8 @@ class TextFieldWidget extends StatelessWidget {
       this.backGroundColor,
       required this.hintText,
       this.isOpscure,
-      this.suffixIcon});
+      this.suffixIcon,
+      this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +62,14 @@ class TextFieldWidget extends StatelessWidget {
         ),
         obscureText: isOpscure ?? false,
         style: TextStyles.medium16BlueBerry,
+        controller: controller,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (textValue) {
+          if (textValue == null || textValue.isEmpty) {
+            return "required";
+          }
+          return null;
+        },
       ),
     );
   }
