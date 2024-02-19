@@ -1,6 +1,7 @@
 class EndPoints {
   static String baseUrl = "https://arabicsl9.azurewebsites.net/";
   static String signUp = "api/Account/Register";
+  static String signIn = "api/Account/Login";
 }
 
 class ApiKey {
@@ -13,4 +14,7 @@ class ApiKey {
   static String name = "User_name";
   static String confirmPassword = "confirmPassword";
   static String role = "Role";
+  static String token = "token";
+  static String error = "Errors";
+  static String success = "Success";
 }

@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
+import 'package:fluent_hands/core/api/end_points.dart';
 import 'package:fluent_hands/core/error/exceptions.dart';
 import 'package:fluent_hands/features/sign_up/cubit/sign_up_states.dart';
 import 'package:fluent_hands/features/sign_up/data/repository/sign_up_repo.dart';
@@ -30,8 +33,18 @@ class SignUpCubit extends Cubit<SignUpStates> {
         confirmPassword: signUpConfirmPassword.text);
     print("============+$response");
     response.fold(
-      (listErrors) => emit(SignUpFailure(errormessage: listErrors)),
-      (signUpModel) => emit(SignUpSuccess(message: signUpModel.message)),
+      (errorMessage) => emit(SignUpFailure(errormessage: errorMessage)),
+      (signUpModel) {
+        if (signUpModel.status == ApiKey.success) {
+          emit(SignUpSuccess(message: signUpModel.message));
+          log(signUpModel.message);
+        } else {
+          emit(SignUpFailure(errormessage: signUpModel.listErrors.toString()));
+          log("============================================");
+          log(signUpModel.listErrors.toString());
+        }
+        //  print(signUpModel);
+      },
     );
   }
 }

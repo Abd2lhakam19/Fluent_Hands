@@ -24,9 +24,10 @@ class SingUpRepo {
         ApiKey.confirmPassword: confirmPassword,
       });
       final signUpModel = SingUpModel.fromJson(response);
+      print(response);
       return Right(signUpModel);
     } on ServerException catch (e) {
-      return Left(e.errorModel.listErrors);
+      return Left(e.errorModel.errorMessage);
     }
   }
 }

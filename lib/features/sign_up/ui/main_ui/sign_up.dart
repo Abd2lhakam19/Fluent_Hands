@@ -61,17 +61,20 @@ class _SignUpState extends State<SignUp> {
                     TextForms(),
                     const Gap(24),
                     state is SignUpLoading
-                        ? const CircularProgressIndicator()
+                        ? const Center(child: CircularProgressIndicator())
                         : ButtonWidget(
                             onPressed: () {
-                              // Navigator.of(context).push(
-                              //   MaterialPageRoute(
-                              //     builder: (context) => const AppLayout(),
-                              //   ),
-                              // );
                               context.read<SignUpCubit>().signUp();
+                              if (state is SignUpSuccess) {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => const AppLayout(),
+                                  ),
+                                );
+                              }
                             },
-                            text: AppStrings.signUp),
+                            text: AppStrings.signUp,
+                          ),
                     const Gap(16),
                     const AlreadyHave(),
                   ],
