@@ -23,29 +23,31 @@ void handleDioExceptions(DioException e) {
       throw ServerException(errorModel: ErrorModel.fromJson(e.response!.data));
     case DioExceptionType.unknown:
       throw ServerException(errorModel: ErrorModel.fromJson(e.response!.data));
-    case DioExceptionType.badResponse:
-      switch (e.response?.statusCode) {
-        case 400: // Bad request
-          throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-        case 401: //unauthorized
-          throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-        case 403: //forbidden
-          throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-        case 404: //not found
-          throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-        case 409: //cofficient
-          throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-        case 422: //  Unprocessable Entity
-          throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-        case 504: // Server exception
-          throw ServerException(
-              errorModel: ErrorModel.fromJson(e.response!.data));
-      }
+    // case DioExceptionType.badResponse:
+    //   switch (e.response?.statusCode) {
+    //     case 400: // Bad request
+    //       throw ServerException(
+    //           errorModel: ErrorModel.fromJson(e.response!.data));
+    //     case 401: //unauthorized
+    //       throw ServerException(
+    //           errorModel: ErrorModel.fromJson(e.response!.data));
+    //     case 403: //forbidden
+    //       throw ServerException(
+    //           errorModel: ErrorModel.fromJson(e.response!.data));
+    //     case 404: //not found
+    //       throw ServerException(
+    //           errorModel: ErrorModel.fromJson(e.response!.data));
+    //     case 409: //cofficient
+    //       throw ServerException(
+    //           errorModel: ErrorModel.fromJson(e.response!.data));
+    //     case 422: //  Unprocessable Entity
+    //       throw ServerException(
+    //           errorModel: ErrorModel.fromJson(e.response!.data));
+    //     case 504: // Server exception
+    //       throw ServerException(
+    //           errorModel: ErrorModel.fromJson(e.response!.data));
+    //   }
+    default:
+      throw ("sdsdsd");
   }
 }

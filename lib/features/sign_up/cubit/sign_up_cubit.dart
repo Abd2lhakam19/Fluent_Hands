@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:fluent_hands/core/api/end_points.dart';
-import 'package:fluent_hands/core/error/exceptions.dart';
 import 'package:fluent_hands/features/sign_up/cubit/sign_up_states.dart';
 import 'package:fluent_hands/features/sign_up/data/repository/sign_up_repo.dart';
 import 'package:flutter/material.dart';
