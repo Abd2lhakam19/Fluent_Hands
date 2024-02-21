@@ -20,5 +20,6 @@ class AppStrings {
       profile = "Profile",
       settings = "Settings",
       orSignInWith = "Or sign in with :",
-      dontHaveAccount = "Don't have any account? ";
+      dontHaveAccount = "Don't have any account? ",
+      changeProfilePicture = "Change Profile Picture";
 }
