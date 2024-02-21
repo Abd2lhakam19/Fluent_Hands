@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 
 import 'core/cashe/cashe_helper.dart';
@@ -8,6 +9,9 @@ void main() {
 
   CacheHelper().init();
   runApp(
-    const FluentHands(),
+    DevicePreview(
+      enabled: true,
+      builder: (context) => const FluentHands(),
+    ),
   );
 }

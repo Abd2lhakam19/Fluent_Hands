@@ -1,4 +1,3 @@
-import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:dartz/dartz.dart';
 import 'package:fluent_hands/core/api/api_consumer.dart';
 import 'package:fluent_hands/core/api/end_points.dart';

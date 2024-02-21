@@ -1,3 +1,5 @@
+import 'package:fluent_hands/features/sign_up/ui/main_ui/sign_up.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/helper/app_strings.dart';
@@ -16,6 +18,11 @@ class DontHaveAccount extends StatelessWidget {
           style: TextStyles.regular16BlueBerry,
         ),
         TextSpan(
+          recognizer: TapGestureRecognizer()
+            ..onTap =
+                () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const SignUp(),
+                    )),
           text: AppStrings.signUp,
           style: TextStyles.regular16orange,
         )

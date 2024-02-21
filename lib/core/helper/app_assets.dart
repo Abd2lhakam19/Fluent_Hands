@@ -12,5 +12,10 @@ class AppAssets {
       profileSelected = "assets/images/profile_selected.png",
       settings = "assets/images/settings.png",
       settingsSelected = "assets/images/settings_selected.png",
-      googleIcon = "assets/images/google.png";
+      googleIcon = "assets/images/google.png",
+      learnTabSelected = "assets/images/learn_selected.png",
+      learnTabUnSelected = "assets/images/learn_unselected.png",
+      examSelected = "assets/images/exam_selected.png",
+      examUnSelected = "assets/images/exam_unselected.png",
+      next = "assets/images/next.png";
 }

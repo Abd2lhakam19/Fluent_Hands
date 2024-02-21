@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:fluent_hands/core/api/end_points.dart';
 import 'package:fluent_hands/features/sign_in/cubit/sign_in_states.dart';
-import 'package:fluent_hands/features/sign_in/data/models/sign_in_model.dart';
 import 'package:fluent_hands/features/sign_in/data/repository/sign_in_repo.dart';
 import 'package:flutter/material.dart';
 

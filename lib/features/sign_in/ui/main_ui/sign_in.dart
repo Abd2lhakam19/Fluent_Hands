@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:fluent_hands/core/api/api_consumer.dart';
 import 'package:fluent_hands/core/api/dio_consumer.dart';
 import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/features/sign_in/cubit/sign_in_cubit.dart';
