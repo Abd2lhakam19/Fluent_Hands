@@ -4,6 +4,7 @@ import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/core/widgets/button_widget.dart';
 import 'package:fluent_hands/features/sign_in/ui/main_ui/sign_in.dart';
 import 'package:fluent_hands/features/sign_up/ui/main_ui/sign_up.dart';
+import 'package:fluent_hands/layout/app_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -49,7 +50,14 @@ class OnBoarding2 extends StatelessWidget {
             ),
             const Gap(16),
             ButtonWidget(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AppLayout(),
+                  ),
+                );
+              },
               text: AppStrings.continueAsAguest,
               borderColor: AppColors.orangeColor,
               backGroundColor: Colors.transparent,
