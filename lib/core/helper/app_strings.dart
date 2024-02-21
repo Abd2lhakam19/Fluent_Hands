@@ -29,4 +29,5 @@ class AppStrings {
       level2Details = "Alphabets - Numbers\nBasic Words",
       level3 = "Level 3",
       level3Details = "Alphabets - Numbers\nBasic Words";
+
 }

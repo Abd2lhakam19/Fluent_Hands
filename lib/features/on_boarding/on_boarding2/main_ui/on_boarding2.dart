@@ -51,9 +51,12 @@ class OnBoarding2 extends StatelessWidget {
             const Gap(16),
             ButtonWidget(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const AppLayout(),
-                ));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AppLayout(),
+                  ),
+                );
               },
               text: AppStrings.continueAsAguest,
               borderColor: AppColors.orangeColor,
