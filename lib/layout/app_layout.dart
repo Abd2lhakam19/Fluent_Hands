@@ -17,8 +17,8 @@ class _AppLayoutState extends State<AppLayout> {
   List<Widget> screens = const [
     HomeScreen(),
     LearnScreen(),
+    SettingsScreen(),
     ProfileScreen(),
-    SettingsScreen()
   ];
   @override
   Widget build(BuildContext context) {

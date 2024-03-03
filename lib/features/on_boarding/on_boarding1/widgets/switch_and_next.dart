@@ -1,4 +1,6 @@
+import 'package:fluent_hands/core/cashe/cashe_helper.dart';
 import 'package:fluent_hands/features/on_boarding/on_boarding2/main_ui/on_boarding2.dart';
+import 'package:fluent_hands/layout/app_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -38,9 +40,9 @@ class SwitchAndNext extends StatelessWidget {
         const Gap(110),
         ButtonWidget(
           onPressed: () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => const OnBoarding2(),
-            ));
+
+            CacheHelper.sharedPreferences.setBool('isFirstTime', false);
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const OnBoarding2(),));
           },
           text: AppStrings.next,
         ),

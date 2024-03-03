@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fluent_hands/core/api/dio_consumer.dart';
+import 'package:fluent_hands/core/cashe/cashe_helper.dart';
 import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/features/sign_in/cubit/sign_in_cubit.dart';
 import 'package:fluent_hands/features/sign_in/cubit/sign_in_states.dart';
@@ -32,7 +33,14 @@ class _SignInState extends State<SignIn> {
           SignInCubit(singInRepo: SingInRepo(api: DioConsumer(dio: Dio()))),
       child: BlocConsumer<SignInCubit, SignInStates>(
         listener: (context, state) {
+
           if (state is SignInSuccess) {
+            CacheHelper.sharedPreferences.setString('token', state.response.token);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const AppLayout(),
+              ),
+            );
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text("Success"),
             ));
@@ -72,15 +80,8 @@ class _SignInState extends State<SignIn> {
                             child: CircularProgressIndicator(),
                           )
                         : ButtonWidget(
-                            onPressed: () async {
+                            onPressed: () {
                               context.read<SignInCubit>().signIn();
-                              if (state is SignInSuccess) {
-                                await Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => const AppLayout(),
-                                  ),
-                                );
-                              }
                             },
                             text: AppStrings.signIn,
                           ),
@@ -95,7 +96,7 @@ class _SignInState extends State<SignIn> {
                     const Gap(24),
                     Text(
                       AppStrings.orSignInWith,
-                      style: TextStyles.semibold18BlueBerry,
+                      style: TextStyles.semiBold18BlueBerry,
                       textAlign: TextAlign.center,
                     ),
                     const Gap(16),

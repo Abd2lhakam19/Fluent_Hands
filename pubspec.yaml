@@ -48,6 +48,14 @@ dependencies:
   freezed: ^2.4.7
   dart_jsonwebtoken: ^2.13.0
   device_preview: ^1.1.0
+  percent_indicator: ^4.2.3
+  camera: ^0.10.5+9
+  path_provider: ^2.1.2
+  google_fonts: ^6.1.0
+  model_viewer_plus: ^1.7.0
+  flutter_3d_controller: ^1.2.1
+  carousel_slider: ^4.2.1
+
 
 dev_dependencies:
   
@@ -76,6 +84,7 @@ flutter:
   assets:
     - assets/svg/
     - assets/images/
+    - assets/model/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -91,12 +100,24 @@ flutter:
   fonts:
     - family: montserrat
       fonts:
-        - asset: assets/fonts/Montserrat-Bold.ttf
-        - asset: assets/fonts/Montserrat-Light.ttf
-        - asset: assets/fonts/Montserrat-Medium.ttf
-        - asset: assets/fonts/Montserrat-Regular.ttf
-        - asset: assets/fonts/Montserrat-SemiBold.ttf
-        - asset: assets/fonts/Montserrat-Thin.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Bold.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Light.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Medium.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/montserrat/Montserrat-SemiBold.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Thin.ttf
+    - family: poppins
+      fonts:
+        - asset: assets/fonts/poppins/Poppins-Bold.ttf
+        - asset: assets/fonts/poppins/Poppins-ExtraBold.ttf
+        - asset: assets/fonts/poppins/Poppins-ExtraLight.ttf
+        - asset: assets/fonts/poppins/Poppins-Light.ttf
+        - asset: assets/fonts/poppins/Poppins-Medium.ttf
+        - asset: assets/fonts/poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/poppins/Poppins-SemiBold.ttf
+        - asset: assets/fonts/poppins/Poppins-Thin.ttf
+
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

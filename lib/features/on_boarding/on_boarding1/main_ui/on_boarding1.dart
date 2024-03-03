@@ -16,12 +16,13 @@ class OnBoarding1 extends StatefulWidget {
 }
 
 class _OnBoarding1State extends State<OnBoarding1> {
+
   int _currentPage = 0;
   List<OnBoardingModel> screens = [
     OnBoardingModel(
         title: AppStrings.translation,
         svgPic: AppAssets.onBoarding1,
-        dec: AppStrings.unlockTheWorled),
+        dec: AppStrings.unlockTheWorld),
     OnBoardingModel(
         title: AppStrings.learning,
         svgPic: AppAssets.onBoarding2,

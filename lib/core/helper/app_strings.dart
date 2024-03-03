@@ -1,6 +1,6 @@
 class AppStrings {
   static const String translation = "Translation",
-      unlockTheWorled =
+      unlockTheWorld =
           "Unlock the world of communication with\n Fluent Hands app-where gestures speak\n louder than words.",
       next = "Next",
       learning = "Learning",
@@ -8,7 +8,7 @@ class AppStrings {
           "Speak without words, but with a powerful language. Experience the beauty of communication.",
       signUp = "Sign Up",
       signIn = "Sign In",
-      continueAsAguest = "Continue as a guest",
+      continueAsAGuest = "Continue as a guest",
       name = "Name",
       email = "Email",
       password = "Password",
@@ -20,14 +20,19 @@ class AppStrings {
       profile = "Profile",
       settings = "Settings",
       orSignInWith = "Or sign in with :",
-      dontHaveAccount = "Don't have any account? ",
+      doNotHaveAccount = "Don't have any account? ",
       exam = "Exam",
-      level1 = "Level 1",
+      level1 = "Level One",
       level1Details = "Alphabets - Numbers\nBasic Words",
-      easy = "easy",
-      level2 = "Level 2",
-      level2Details = "Alphabets - Numbers\nBasic Words",
-      level3 = "Level 3",
-      level3Details = "Alphabets - Numbers\nBasic Words";
-
+      easy = "Easy",
+      interMediate = "intermediate",
+      advanced = "Advanced",
+      level2 = "Level Two",
+      level2Details = "Greetings - Places\nDirections",
+      level3 = "Level Three",
+      level3Details = "General Words -\nTraffics",
+      changeProfilePicture = "Change Profile Picture",
+      levels = "Levels",
+      starLearning = "Start Learning\nArabic Sign\nLanguage",
+      currentLevel = "Current Level";
 }

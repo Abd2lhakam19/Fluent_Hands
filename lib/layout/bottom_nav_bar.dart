@@ -7,19 +7,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
-  const CustomBottomNavBar(
-      {super.key, required this.selectedIndex, required this.onTap});
+  const CustomBottomNavBar({
+    super.key,
+    required this.selectedIndex,
+    required this.onTap,
+  });
   final int selectedIndex;
   final Function(int) onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-      height: 56.h,
-      width: 343.w,
+      margin: EdgeInsets.only(left: 16.w,right: 16.w,bottom: 20.h),
+      height: 70.h,
+      width: 335.w,
       decoration: BoxDecoration(
-        color: AppColors.blueBerry,
-        borderRadius: BorderRadius.circular(30),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(44),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -36,8 +39,8 @@ class CustomBottomNavBar extends StatelessWidget {
                       : index == 1
                           ? AppAssets.learn
                           : index == 2
-                              ? AppAssets.profile
-                              : AppAssets.settings),
+                              ? AppAssets.settings
+                              : AppAssets.profile),
                   color: selectedIndex != index
                       ? AppColors.iconColor
                       : AppColors.orangeColor,
@@ -49,11 +52,13 @@ class CustomBottomNavBar extends StatelessWidget {
                       : index == 1 && selectedIndex == index
                           ? AppStrings.learn
                           : index == 2 && selectedIndex == index
-                              ? AppStrings.profile
+                              ? AppStrings.settings
                               : selectedIndex == index
-                                  ? AppStrings.settings
+                                  ? AppStrings.profile
                                   : "",
-                  style: TextStyles.regular13orange,
+                  style: TextStyles.regular13orange.copyWith(
+                    color: AppColors.orangeColor,
+                  ),
                 ),
               ],
             ),

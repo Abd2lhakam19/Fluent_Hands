@@ -17,5 +17,19 @@ class AppAssets {
       learnTabUnSelected = "assets/images/learn_unselected.png",
       examSelected = "assets/images/exam_selected.png",
       examUnSelected = "assets/images/exam_unselected.png",
-      next = "assets/images/next.png";
+      next = "assets/images/next.png",
+      hand = "assets/images/hand.png",
+      badge = "assets/images/badge.png",
+      add = "assets/images/add.png",
+      flashOff = "assets/images/flash_off.png",
+      flashOn = "assets/images/flash_on.png",
+      takePhoto = "assets/images/camera.png",
+      rotateCamera = "assets/images/rotate.png",
+      gallery = "assets/images/gallery.png",
+      play = "assets/images/play.png",
+      afterGif = "assets/images/after.gif",
+      pigHand = "assets/images/pig_hand.png",
+      hello = "assets/images/hello.png",
+  salam = "assets/images/salam.gif",
+  send = "assets/images/send.png";
 }

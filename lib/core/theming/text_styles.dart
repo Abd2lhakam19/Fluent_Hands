@@ -10,7 +10,7 @@ class TextStyles {
         color: AppColors.blueBerry,
         fontFamily: 'montserrat',
       ),
-      semibold18BlueBerry = TextStyle(
+      semiBold18BlueBerry = TextStyle(
         fontSize: 18.sp,
         fontWeight: FontWeightHelper.semiBold,
         color: AppColors.blueBerry,
@@ -56,6 +56,12 @@ class TextStyles {
         fontSize: 16.sp,
         fontWeight: FontWeightHelper.regular,
         color: AppColors.blueBerry,
+        fontFamily: 'montserrat',
+      ),
+      medium24Black = TextStyle(
+        fontSize: 24.sp,
+        fontWeight: FontWeightHelper.medium,
+        color: AppColors.fontColor,
         fontFamily: 'montserrat',
       );
 }

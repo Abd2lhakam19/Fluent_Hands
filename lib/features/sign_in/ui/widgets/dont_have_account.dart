@@ -14,7 +14,7 @@ class DontHaveAccount extends StatelessWidget {
       textAlign: TextAlign.center,
       text: TextSpan(children: [
         TextSpan(
-          text: AppStrings.dontHaveAccount,
+          text: AppStrings.doNotHaveAccount,
           style: TextStyles.regular16BlueBerry,
         ),
         TextSpan(

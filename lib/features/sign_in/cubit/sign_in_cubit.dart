@@ -4,6 +4,8 @@ import 'package:fluent_hands/features/sign_in/cubit/sign_in_states.dart';
 import 'package:fluent_hands/features/sign_in/data/repository/sign_in_repo.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/cashe/cashe_helper.dart';
+
 class SignInCubit extends Cubit<SignInStates> {
   SignInCubit({required this.singInRepo}) : super(SignInInitial());
   SingInRepo singInRepo;
@@ -16,14 +18,12 @@ class SignInCubit extends Cubit<SignInStates> {
       email: singInEmail.text,
       password: singInPassword.text,
     );
+
     response
         .fold((errorMessage) => emit(SignInFailure(errormessage: errorMessage)),
             (signInModel) {
-      if (signInModel.status == ApiKey.success) {
-        emit(SignInSuccess());
-      } else {
-        emit(SignInFailure(errormessage: signInModel.message));
-      }
+      CacheHelper.sharedPreferences.setBool('isLogIn', true);
+      return emit(SignInSuccess(response: signInModel));
     });
   }
 }

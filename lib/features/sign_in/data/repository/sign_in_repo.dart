@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:fluent_hands/core/api/api_consumer.dart';
 import 'package:fluent_hands/core/api/end_points.dart';
 import 'package:fluent_hands/core/error/exceptions.dart';
@@ -15,10 +16,16 @@ class SingInRepo {
     required String password,
   }) async {
     try {
-      final response = await api.post(EndPoints.signIn, data: {
+      final response = await api.post(EndPoints.baseUrl+EndPoints.signIn, data: {
         ApiKey.email: email,
         ApiKey.password: password,
-      });
+      },
+        options: Options(
+          headers: {
+            'Authorization':EndPoints.basicAuth
+          }
+        )
+      );
 
       final user = SingInModel.fromJson(response);
 

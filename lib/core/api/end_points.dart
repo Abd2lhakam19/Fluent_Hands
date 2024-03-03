@@ -1,7 +1,17 @@
+import 'dart:convert';
+
 class EndPoints {
-  static String baseUrl = "https://arabicsl9.azurewebsites.net/";
-  static String signUp = "api/Account/Register";
-  static String signIn = "api/Account/Login";
+  static String baseUrl = "http://ziadsalah9-001-site1.anytempurl.com";
+  static String signUp = "/api/Account/Register";
+  static String signIn = "/api/Account/Login";
+  static String getCategoryDirections =
+      "/api/LearningCategoryDirections/getallDirectionsRecoreds",
+  getCategoryWelcome = "/api/LearningCategoryWelcome/getallWelcomesRecoreds",
+      getCategoryGeneral = "/api/LearningGeneralWordsCategory/getallGeneralWordsRecoreds",
+  getCategoryTraffic = "/api/LearningTrafficAndTransPortCategory/getallTrafficRecoreds",
+  modelBaseUrl = "https://signlang-ycxs.onrender.com/",
+  predict = "api/v1/predict";
+ static String basicAuth = 'Basic ' + base64Encode(utf8.encode('11165423:60-dayfreetrial'));
 }
 
 class ApiKey {

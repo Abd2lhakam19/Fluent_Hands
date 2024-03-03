@@ -58,7 +58,7 @@ class OnBoarding2 extends StatelessWidget {
                   ),
                 );
               },
-              text: AppStrings.continueAsAguest,
+              text: AppStrings.continueAsAGuest,
               borderColor: AppColors.orangeColor,
               backGroundColor: Colors.transparent,
             ),
