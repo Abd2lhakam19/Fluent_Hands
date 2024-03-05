@@ -40,7 +40,6 @@ class SwitchAndNext extends StatelessWidget {
         const Gap(110),
         ButtonWidget(
           onPressed: () {
-
             CacheHelper.sharedPreferences.setBool('isFirstTime', false);
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const OnBoarding2(),));
           },

@@ -22,6 +22,7 @@ class _TextToSignState extends State<TextToSign> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
@@ -50,7 +51,7 @@ class _TextToSignState extends State<TextToSign> {
               height: 165.h,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: AppColors.orangeColor,
+                color: Colors.blue,
                 borderRadius: BorderRadius.circular(20),
               
               ),

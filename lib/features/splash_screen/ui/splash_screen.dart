@@ -22,6 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     bool firstTime = CacheHelper.sharedPreferences.getBool('isFirstTime')??true;
     bool isLogIn = CacheHelper.sharedPreferences.getBool('isLogIn')??false;
+    CacheHelper.sharedPreferences.setString('token', "");
     Timer(
       const Duration(seconds: 3),
       () {

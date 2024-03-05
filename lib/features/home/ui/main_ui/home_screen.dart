@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fluent_hands/core/cashe/cashe_helper.dart';
 import 'package:fluent_hands/core/helper/app_assets.dart';
 import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/core/theming/text_styles.dart';
@@ -42,6 +43,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 8.w,
                     ),
                     Image.asset(AppAssets.hello),
+                    Spacer(),
+                  CacheHelper.sharedPreferences.getString('token')!=""? GestureDetector(
+                      onTap: () {
+                        CacheHelper.sharedPreferences.setBool("isLogIn", false);
+                        CacheHelper.sharedPreferences.setString('token', "");
+                        Navigator.pop(context);
+                      },
+                      child: Icon(Icons.logout,
+                      color: Colors.red,),
+                    ):SizedBox.shrink()
                   ],
                 ),
                 SizedBox(

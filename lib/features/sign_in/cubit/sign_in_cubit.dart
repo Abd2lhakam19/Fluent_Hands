@@ -22,8 +22,14 @@ class SignInCubit extends Cubit<SignInStates> {
     response
         .fold((errorMessage) => emit(SignInFailure(errormessage: errorMessage)),
             (signInModel) {
-      CacheHelper.sharedPreferences.setBool('isLogIn', true);
-      return emit(SignInSuccess(response: signInModel));
+          if(signInModel.status==ApiKey.error){
+            return emit(SignInFailure(errormessage: signInModel.message));
+          }
+          else {
+            CacheHelper.sharedPreferences.setBool('isLogIn', true);
+            CacheHelper.sharedPreferences.setString('token', signInModel.token);
+            return emit(SignInSuccess(response: signInModel));
+          }
     });
   }
 }

@@ -25,6 +25,6 @@ class ApiKey {
   static String confirmPassword = "confirmPassword";
   static String role = "Role";
   static String token = "token";
-  static String error = "Errors";
+  static String error = "Error";
   static String success = "Success";
 }
