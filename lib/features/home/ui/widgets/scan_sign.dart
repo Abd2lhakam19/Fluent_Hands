@@ -22,6 +22,7 @@ class ScanSign extends StatefulWidget {
 }
 
 class _ScanSignState extends State<ScanSign> {
+  String res = "";
   HomeCubit homeCubit =
       HomeCubit(homeRepo: HomeRepo(api: DioConsumer(dio: Dio())));
   late CameraController controller;
@@ -30,6 +31,7 @@ class _ScanSignState extends State<ScanSign> {
   bool flashed = false;
   @override
   void initState() {
+
     controller = CameraController(cameras![0], ResolutionPreset.medium);
     controller.initialize().then((_) {
       if (!mounted) {
@@ -88,6 +90,16 @@ class _ScanSignState extends State<ScanSign> {
       bloc: homeCubit,
       listener: (context, state) {
         if (state is SuccessScannedState) {
+          if(state.message!="not clear")
+            {
+              if(state.message=="أ" && res.length>=1)
+                {
+                  res+="ا";
+                }
+              else {
+                res += state.message;
+              }
+            }
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Container(
@@ -114,7 +126,7 @@ class _ScanSignState extends State<ScanSign> {
                               ),
                             )
                           : Text(
-                              homeCubit.arabicAlphabets[state.message]!,
+                             res,
                               style: GoogleFonts.cairo(
                                 color: const Color(0xff332ba1),
                                 fontWeight: FontWeightHelper.semiBold,
@@ -201,17 +213,22 @@ class _ScanSignState extends State<ScanSign> {
                       SizedBox(
                         width: 50.w,
                       ),
-                      Container(
-                        height: 48.h,
-                        width: 48.w,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: const Color(0xffc4c4c4).withOpacity(0.19)),
-                        child: const Center(
-                          child: ImageIcon(
-                            AssetImage(AppAssets.gallery),
-                            color: Colors.white,
-                            size: 30,
+                      GestureDetector(
+                        onTap:  () {
+                          res+=" ";
+                        },
+                        child: Container(
+                          height: 48.h,
+                          width: 48.w,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: const Color(0xffc4c4c4).withOpacity(0.19)),
+                          child: const Center(
+                            child: Text("sp",
+                            style:TextStyle(
+                              color:Colors.white,
+                              fontSize:20
+                            ))
                           ),
                         ),
                       ),
