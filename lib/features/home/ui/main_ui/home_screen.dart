@@ -1,9 +1,6 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fluent_hands/core/cashe/cashe_helper.dart';
-import 'package:fluent_hands/core/helper/app_assets.dart';
 import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/core/theming/text_styles.dart';
-import 'package:fluent_hands/core/widgets/button_widget.dart';
 import 'package:fluent_hands/features/home/ui/widgets/scan_sign.dart';
 import 'package:fluent_hands/features/home/ui/widgets/text_to_sign.dart';
 import 'package:fluent_hands/features/learn/ui/widgets/top_widget.dart';
@@ -28,13 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 32.h),
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 32.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-            
                     Text(
                       "Marhaba ",
                       style: TextStyles.bold24BlueBerry,
@@ -42,36 +38,41 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       width: 8.w,
                     ),
-                    Image.asset(AppAssets.hello),
-                    Spacer(),
-                  CacheHelper.sharedPreferences.getString('token')!=""? GestureDetector(
-                      onTap: () {
-                        CacheHelper.sharedPreferences.setBool("isLogIn", false);
-                        CacheHelper.sharedPreferences.setString('token', "");
-                        Navigator.pop(context);
-                      },
-                      child: Icon(Icons.logout,
-                      color: Colors.red,),
-                    ):SizedBox.shrink()
+                    // Image.asset(AppAssets.hello),
+                    const Spacer(),
+                    CacheHelper.sharedPreferences.getString('token') != ""
+                        ? GestureDetector(
+                            onTap: () {
+                              CacheHelper.sharedPreferences
+                                  .setBool("isLogIn", false);
+                              CacheHelper.sharedPreferences
+                                  .setString('token', "");
+                              Navigator.pop(context);
+                            },
+                            child: const Icon(
+                              Icons.logout,
+                              color: Colors.red,
+                            ),
+                          )
+                        : const SizedBox.shrink()
                   ],
                 ),
                 SizedBox(
                   height: 24.h,
                 ),
-                Container(
-                 // padding: EdgeInsets.symmetric(horizontal: 5.w),
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40)
-                  ),
-                    child: Image.asset(AppAssets.salam)),
+                // Container(
+                //  // padding: EdgeInsets.symmetric(horizontal: 5.w),
+                //   clipBehavior: Clip.antiAlias,
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(40)
+                //   ),
+                //     child: Image.asset(AppAssets.salam)),
                 SizedBox(
                   height: 24.h,
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-            
                     children: [
                       TopWidget(des: "Scan Your\nHand And\nGet The word"),
                       SizedBox(
@@ -90,10 +91,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ScanSign(),));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ScanSign(),
+                          ));
                         },
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 14.w, vertical: 12.h),
                           alignment: Alignment.center,
                           height: 150.h,
                           width: 200.w,
@@ -108,9 +112,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          child:Text("Sign To Text",style: TextStyles.bold24BlueBerry.copyWith(
-                            color: AppColors.orangeColor
-                          ),textAlign: TextAlign.center,) ,
+                          child: Text(
+                            "Sign To Text",
+                            style: TextStyles.bold24BlueBerry
+                                .copyWith(color: AppColors.orangeColor),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -118,10 +125,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TextToSign(),));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const TextToSign(),
+                          ));
                         },
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 9.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 14.w, vertical: 9.h),
                           alignment: Alignment.center,
                           height: 150.h,
                           width: 200.w,
@@ -136,16 +146,18 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          child: Text("Text To Sign",style: TextStyles.bold24BlueBerry.copyWith(
-                              color: AppColors.orangeColor
-                          ),textAlign: TextAlign.center,) ,
+                          child: Text(
+                            "Text To Sign",
+                            style: TextStyles.bold24BlueBerry
+                                .copyWith(color: AppColors.orangeColor),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
 
-            
                 // Center(
                 //   child: ButtonWidget(
                 //     onPressed: () {

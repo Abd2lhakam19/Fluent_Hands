@@ -30,6 +30,6 @@ class AppAssets {
       afterGif = "assets/images/after.gif",
       pigHand = "assets/images/pig_hand.png",
       hello = "assets/images/hello.png",
-  salam = "assets/images/salam.gif",
-  send = "assets/images/send.png";
+      salam = "assets/images/salam.gif",
+      send = "assets/images/send.png";
 }

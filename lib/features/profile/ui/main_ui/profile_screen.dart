@@ -1,7 +1,6 @@
 import 'package:fluent_hands/core/helper/app_assets.dart';
 import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/features/profile/ui/widgets/profile_widget.dart';
-import 'package:fluent_hands/features/profile/ui/widgets/top_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -30,7 +29,6 @@ class ProfileScreen extends StatelessWidget {
                   //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(160), bottomRight: Radius.circular(160)),
                   //   ),
                   // ),
-                  TopCircle(),
                   // Gap(0),
                   CircleAvatar(
                     radius: 65,

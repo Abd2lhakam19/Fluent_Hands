@@ -3,14 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../core/helper/app_assets.dart';
-import '../../../../core/helper/app_strings.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/text_styles.dart';
+
 class TopWidget extends StatelessWidget {
-   TopWidget({
-    super.key,
-    required this.des
-  });
+  TopWidget({super.key, required this.des});
   String des;
   @override
   Widget build(BuildContext context) {
