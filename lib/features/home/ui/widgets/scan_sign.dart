@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:fluent_hands/core/api/dio_consumer.dart';
+import 'package:fluent_hands/core/widgets/button_widget.dart';
 import 'package:fluent_hands/features/home/cubit/home_cubit.dart';
 import 'package:fluent_hands/features/home/cubit/home_states.dart';
 import 'package:fluent_hands/features/home/data/repos/home_repo.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../../core/helper/app_assets.dart';
 import '../../../../core/helper/font_weight_helper.dart';
 import '../../../../core/theming/app_colors.dart';
@@ -15,7 +17,7 @@ import '../../../../core/theming/text_styles.dart';
 import '../../../../main.dart';
 
 class ScanSign extends StatefulWidget {
-  ScanSign({super.key});
+  const ScanSign({super.key});
 
   @override
   State<ScanSign> createState() => _ScanSignState();
@@ -31,7 +33,6 @@ class _ScanSignState extends State<ScanSign> {
   bool flashed = false;
   @override
   void initState() {
-
     controller = CameraController(cameras![0], ResolutionPreset.medium);
     controller.initialize().then((_) {
       if (!mounted) {
@@ -71,192 +72,202 @@ class _ScanSignState extends State<ScanSign> {
       }
 
       final XFile picture = await controller.takePicture();
-      if (picture != null) {
-        setState(() {
-          homeCubit.imageFile = picture;
-          homeCubit.getPredict();
-          // If you want to do something with the captured image, you can use `picture.path`
-          print('Picture saved to: ${homeCubit.imageFile!.path}');
-        });
-      }
+      setState(() {
+        homeCubit.imageFile = picture;
+        homeCubit.getPredict();
+        // If you want to do something with the captured image, you can use `picture.path`
+        print('Picture saved to: ${homeCubit.imageFile!.path}');
+      });
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeStates>(
-      bloc: homeCubit,
-      listener: (context, state) {
-        if (state is SuccessScannedState) {
-          if(state.message!="not clear")
-            {
-              if(state.message=="أ" && res.length>=1)
-                {
-                  res+="ا";
-                }
-              else {
+        bloc: homeCubit,
+        listener: (context, state) {
+          if (state is SuccessScannedState) {
+            if (state.message != "not clear") {
+              if (state.message == "أ" && res.isNotEmpty) {
+                res += "ا";
+              } else {
                 res += state.message;
               }
             }
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Container(
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text("Result"),
+                  elevation: 0.0,
                   alignment: Alignment.center,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 50.w, vertical: 60.h),
-                  height: 354.h,
-                  width: 330.w,
-                  decoration: BoxDecoration(
-                    color: AppColors.darkWhite,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.stretch,
-                    //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      state.message == "not clear"
-                          ? Text(
-                              "الصورة ليست واضحة",
-                              style: GoogleFonts.cairo(
-                                color: const Color(0xff332ba1),
-                                fontWeight: FontWeightHelper.semiBold,
-                                fontSize: 24.sp,
-                              ),
-                            )
-                          : Text(
-                             res,
-                              style: GoogleFonts.cairo(
-                                color: const Color(0xff332ba1),
-                                fontWeight: FontWeightHelper.semiBold,
-                                fontSize: 24.sp,
-                              ),
-                            ),
-                      SizedBox(
-                        height: 35.h,
+                  content: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 50.w, vertical: 60.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.darkWhite,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      Image.asset(AppAssets.pigHand),
-                    ],
-                  )),
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            ),
-          );
-        } else if (state is FailureScannedState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Error While Scanning"),
-            ),
-          );
-        }
-      },
-      builder: (context, state) {
-        return Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            leading: GestureDetector(
-              onTap: () {
-                setState(() {
-                  flashed = !flashed;
-                });
-              },
-              child: ImageIcon(
-                AssetImage(!flashed ? AppAssets.flashOff : AppAssets.flashOn),
-                size: 40,
-                color: Colors.white,
-              ),
-            ),
-            actions: [
-              GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Image.asset(AppAssets.add)),
-            ],
-            centerTitle: true,
-            title: Text(
-              "Scan",
-              style: TextStyles.medium24Black.copyWith(
-                  color: Colors.white, fontWeight: FontWeightHelper.semiBold),
-            ),
-          ),
-          body: Container(
-            foregroundDecoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                colors: [
-                  AppColors.blueColor.withOpacity(0.1),
-                  AppColors.blueColor.withOpacity(0.1),
-                  AppColors.blueBerry.withOpacity(0.1),
-                ],
-                stops: const [0.18, 0.02, 0.29],
-              ),
-            ),
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: AspectRatio(
-                    aspectRatio: MediaQuery.of(context).devicePixelRatio,
-                    child: CameraPreview(controller),
-                  ),
-                ),
-                // if(imagePath!=null) Image.file(File(imagePath!.path)),
-                Positioned(
-                  bottom: 50,
-                  left: 10,
-                  child: Row(
-                    //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 50.w,
-                      ),
-                      GestureDetector(
-                        onTap:  () {
-                          res+=" ";
+                      child: Column(
+                        // crossAxisAlignment: CrossAxisAlignment.stretch,
+                        //  mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          state.message == "not clear"
+                              ? Text(
+                                  "الصورة ليست واضحة",
+                                  style: GoogleFonts.cairo(
+                                    color: const Color(0xff332ba1),
+                                    fontWeight: FontWeightHelper.semiBold,
+                                    fontSize: 24.sp,
+                                  ),
+                                )
+                              : Text(
+                                  res,
+                                  style: GoogleFonts.cairo(
+                                    color: const Color(0xff332ba1),
+                                    fontWeight: FontWeightHelper.semiBold,
+                                    fontSize: 24.sp,
+                                  ),
+                                ),
+                          SizedBox(
+                            height: 35.h,
+                          ),
+                          //  Image.asset(AppAssets.pigHand),
+                        ],
+                      )),
+                  actions: [
+                    ButtonWidget(
+                        onPressed: () {
+                          Navigator.of(context).pop();
                         },
-                        child: Container(
-                          height: 48.h,
-                          width: 48.w,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: const Color(0xffc4c4c4).withOpacity(0.19)),
-                          child: const Center(
-                            child: Text("sp",
-                            style:TextStyle(
-                              color:Colors.white,
-                              fontSize:20
-                            ))
+                        text: "Close")
+                  ],
+                );
+              },
+            );
+          } else if (state is FailureScannedState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("Error While Scanning"),
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            extendBodyBehindAppBar: true,
+            appBar: AppBar(
+              leading: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    flashed = !flashed;
+                  });
+                },
+                child: ImageIcon(
+                  AssetImage(!flashed ? AppAssets.flashOff : AppAssets.flashOn),
+                  size: 40,
+                  color: Colors.white,
+                ),
+              ),
+              actions: [
+                GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset(AppAssets.add)),
+              ],
+              centerTitle: true,
+              title: Text(
+                "Scan",
+                style: TextStyles.medium24Black.copyWith(
+                    color: Colors.white, fontWeight: FontWeightHelper.semiBold),
+              ),
+            ),
+            body: Container(
+              foregroundDecoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [
+                    AppColors.blueColor.withOpacity(0.1),
+                    AppColors.blueColor.withOpacity(0.1),
+                    AppColors.blueBerry.withOpacity(0.1),
+                  ],
+                  stops: const [0.18, 0.02, 0.29],
+                ),
+              ),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: AspectRatio(
+                      aspectRatio: MediaQuery.of(context).devicePixelRatio,
+                      child: CameraPreview(controller),
+                    ),
+                  ),
+                  // if(imagePath!=null) Image.file(File(imagePath!.path)),
+                  Positioned(
+                    bottom: 50,
+                    left: 10,
+                    child: Row(
+                      //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //  mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 50.w,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            res += " ";
+                          },
+                          child: Container(
+                            height: 48.h,
+                            width: 48.w,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color:
+                                    const Color(0xffc4c4c4).withOpacity(0.19)),
+                            child: const Center(
+                                child: Text("sp",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20))),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 50.w,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          takePicture();
-                        },
-                        child: Image.asset(AppAssets.takePhoto),
-                      ),
-                      SizedBox(
-                        width: 50.w,
-                      ),
-                      GestureDetector(
+                        SizedBox(
+                          width: 50.w,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            takePicture();
+                          },
+                          child: const Text(
+                            "ta",
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                            ),
+                          ),
+                          //Image.asset(AppAssets.takePhoto
+                        ),
+                        SizedBox(
+                          width: 50.w,
+                        ),
+                        GestureDetector(
                           onTap: () {
                             toggleCamera();
                           },
-                          child: Image.asset(AppAssets.rotateCamera)),
-                    ],
+                          child: const Text("rotate"),
+                          //Image.asset(AppAssets.rotateCamera)
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        );
-      },
-    );
+          );
+        });
   }
 }

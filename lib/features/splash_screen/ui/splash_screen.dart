@@ -17,28 +17,35 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
+  @override
   void initState() {
     super.initState();
-    bool firstTime = CacheHelper.sharedPreferences.getBool('isFirstTime')??true;
-    bool isLogIn = CacheHelper.sharedPreferences.getBool('isLogIn')??false;
+    bool firstTime =
+        CacheHelper.sharedPreferences.getBool('isFirstTime') ?? true;
+    bool isLogIn = CacheHelper.sharedPreferences.getBool('isLogIn') ?? false;
     CacheHelper.sharedPreferences.setString('token', "");
     Timer(
       const Duration(seconds: 3),
       () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => firstTime?const OnBoarding1():isLogIn? const AppLayout():const OnBoarding2(),
+          builder: (context) => firstTime
+              ? const OnBoarding1()
+              : isLogIn
+                  ? const AppLayout()
+                  : const OnBoarding2(),
         ));
       },
     );
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SvgPicture.asset(AppAssets.svgLogo),
+        child: SvgPicture.asset(
+          AppAssets.svgLogo,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

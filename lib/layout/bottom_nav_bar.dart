@@ -17,7 +17,7 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 16.w,right: 16.w,bottom: 20.h),
+      margin: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 20.h),
       height: 70.h,
       width: 335.w,
       decoration: BoxDecoration(
@@ -27,7 +27,7 @@ class CustomBottomNavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List.generate(
-          4,
+          3,
           (index) => GestureDetector(
             onTap: () => onTap(index),
             child: Row(
@@ -37,27 +37,23 @@ class CustomBottomNavBar extends StatelessWidget {
                   AssetImage(index == 0
                       ? AppAssets.home
                       : index == 1
-                          ? AppAssets.learn
-                          : index == 2
-                              ? AppAssets.settings
-                              : AppAssets.profile),
+                          ? AppAssets.settings
+                          : AppAssets.profile),
                   color: selectedIndex != index
                       ? AppColors.iconColor
-                      : AppColors.orangeColor,
+                      : AppColors.blueColor,
                 ),
                 const Gap(6),
                 Text(
                   index == 0 && selectedIndex == index
                       ? AppStrings.home
                       : index == 1 && selectedIndex == index
-                          ? AppStrings.learn
-                          : index == 2 && selectedIndex == index
-                              ? AppStrings.settings
-                              : selectedIndex == index
-                                  ? AppStrings.profile
-                                  : "",
+                          ? AppStrings.settings
+                          : selectedIndex == index
+                              ? AppStrings.profile
+                              : "",
                   style: TextStyles.regular13orange.copyWith(
-                    color: AppColors.orangeColor,
+                    color: AppColors.blueColor,
                   ),
                 ),
               ],

@@ -5,13 +5,17 @@ class EndPoints {
   static String signUp = "/api/Account/Register";
   static String signIn = "/api/Account/Login";
   static String getCategoryDirections =
-      "/api/LearningCategoryDirections/getallDirectionsRecoreds",
-  getCategoryWelcome = "/api/LearningCategoryWelcome/getallWelcomesRecoreds",
-      getCategoryGeneral = "/api/LearningGeneralWordsCategory/getallGeneralWordsRecoreds",
-  getCategoryTraffic = "/api/LearningTrafficAndTransPortCategory/getallTrafficRecoreds",
-  modelBaseUrl = "https://signlang-ycxs.onrender.com/",
-  predict = "api/v1/predict";
- static String basicAuth = 'Basic ' + base64Encode(utf8.encode('11165423:60-dayfreetrial'));
+          "/api/LearningCategoryDirections/getallDirectionsRecoreds",
+      getCategoryWelcome =
+          "/api/LearningCategoryWelcome/getallWelcomesRecoreds",
+      getCategoryGeneral =
+          "/api/LearningGeneralWordsCategory/getallGeneralWordsRecoreds",
+      getCategoryTraffic =
+          "/api/LearningTrafficAndTransPortCategory/getallTrafficRecoreds",
+      modelBaseUrl = "http://localhost:5000",
+      predict = "/recognize";
+  static String basicAuth =
+      'Basic ${base64Encode(utf8.encode('11165423:60-dayfreetrial'))}';
 }
 
 class ApiKey {

@@ -1,3 +1,4 @@
+import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/features/sign_up/ui/main_ui/sign_up.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,9 @@ class DontHaveAccount extends StatelessWidget {
                       builder: (context) => const SignUp(),
                     )),
           text: AppStrings.signUp,
-          style: TextStyles.regular16orange,
+          style: TextStyles.regular16orange.copyWith(
+            color: AppColors.blueColor,
+          ),
         )
       ]),
     );

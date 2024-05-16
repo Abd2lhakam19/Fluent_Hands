@@ -34,5 +34,17 @@ class AppStrings {
       changeProfilePicture = "Change Profile Picture",
       levels = "Levels",
       starLearning = "Start Learning\nArabic Sign\nLanguage",
-      currentLevel = "Current Level";
+      currentLevel = "Current Level",
+      convertSignToText = "Converts Sign\nLanguage to text",
+      signsDictionary = 'Signs\nDictionary',
+      textToSigns = "Texts to signs",
+      fluentHands = "Fluent Hands",
+      pickYourOption = "Pick your option",
+      fullText = "Full Text",
+      alphabets = "Alphabets",
+      editProfile = "Edit Profile",
+      notification = "Notification",
+      sounds = "Sounds",
+      languages = "Languages",
+      logOut = 'Logout';
 }

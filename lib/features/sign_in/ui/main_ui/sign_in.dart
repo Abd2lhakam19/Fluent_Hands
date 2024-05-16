@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:fluent_hands/core/api/dio_consumer.dart';
 import 'package:fluent_hands/core/cashe/cashe_helper.dart';
 import 'package:fluent_hands/core/helper/app_strings.dart';
+import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/features/sign_in/cubit/sign_in_cubit.dart';
 import 'package:fluent_hands/features/sign_in/cubit/sign_in_states.dart';
 import 'package:fluent_hands/features/sign_in/data/repository/sign_in_repo.dart';
@@ -33,9 +34,9 @@ class _SignInState extends State<SignIn> {
           SignInCubit(singInRepo: SingInRepo(api: DioConsumer(dio: Dio()))),
       child: BlocConsumer<SignInCubit, SignInStates>(
         listener: (context, state) {
-
           if (state is SignInSuccess) {
-            CacheHelper.sharedPreferences.setString('token', state.response.token);
+            CacheHelper.sharedPreferences
+                .setString('token', state.response.token);
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => const AppLayout(),
@@ -71,7 +72,9 @@ class _SignInState extends State<SignIn> {
                     const Gap(10),
                     Text(
                       AppStrings.forgetPassword,
-                      style: TextStyles.regular13orange,
+                      style: TextStyles.regular13orange.copyWith(
+                        color: AppColors.blueColor,
+                      ),
                       textAlign: TextAlign.end,
                     ),
                     const Gap(24),
@@ -100,12 +103,30 @@ class _SignInState extends State<SignIn> {
                       textAlign: TextAlign.center,
                     ),
                     const Gap(16),
-                    SizedBox(
-                      width: 24.w,
-                      height: 24.h,
-                      child: Image.asset(
-                        AppAssets.googleIcon,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 24.w,
+                          height: 24.h,
+                          child: Image.asset(
+                            AppAssets.googleIcon,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20.w,
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            await context
+                                .read<SignInCubit>()
+                                .signInWithFacebook(context);
+                          },
+                          child: const Icon(
+                            Icons.facebook_rounded,
+                          ),
+                        )
+                      ],
                     )
                   ],
                 ),

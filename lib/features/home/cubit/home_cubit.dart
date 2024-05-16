@@ -1,13 +1,8 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
-import 'package:fluent_hands/core/api/end_points.dart';
 import 'package:fluent_hands/features/home/cubit/home_states.dart';
 import 'package:fluent_hands/features/home/data/repos/home_repo.dart';
-
-import '../../../main.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
   HomeCubit({required this.homeRepo}) : super(LoadingScannedState());
@@ -46,10 +41,6 @@ class HomeCubit extends Cubit<HomeStates> {
     'ي': 'حرف الياء',
     // Add more if needed
   };
-
-
-
-
 
   // zoomIn() {
   //   // emit(ZoomInState());

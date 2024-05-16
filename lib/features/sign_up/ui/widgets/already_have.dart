@@ -1,4 +1,5 @@
 import 'package:fluent_hands/core/helper/app_strings.dart';
+import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/core/theming/text_styles.dart';
 import 'package:fluent_hands/features/sign_in/ui/main_ui/sign_in.dart';
 import 'package:flutter/gestures.dart';
@@ -23,7 +24,9 @@ class AlreadyHave extends StatelessWidget {
                       builder: (context) => const SignIn(),
                     )),
           text: AppStrings.signIn,
-          style: TextStyles.regular16orange,
+          style: TextStyles.regular16orange.copyWith(
+            color: AppColors.blueColor,
+          ),
         )
       ]),
     );

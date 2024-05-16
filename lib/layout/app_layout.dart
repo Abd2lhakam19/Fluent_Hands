@@ -1,5 +1,4 @@
 import 'package:fluent_hands/features/home/ui/main_ui/home_screen.dart';
-import 'package:fluent_hands/features/learn/ui/main_ui/learn_screen.dart';
 import 'package:fluent_hands/features/profile/ui/main_ui/profile_screen.dart';
 import 'package:fluent_hands/features/settings/ui/main_ui/settings_screen.dart';
 import 'package:fluent_hands/layout/bottom_nav_bar.dart';
@@ -16,7 +15,6 @@ class _AppLayoutState extends State<AppLayout> {
   int selectedIndex = 0;
   List<Widget> screens = const [
     HomeScreen(),
-    LearnScreen(),
     SettingsScreen(),
     ProfileScreen(),
   ];

@@ -1,6 +1,5 @@
 import 'package:fluent_hands/core/cashe/cashe_helper.dart';
 import 'package:fluent_hands/features/on_boarding/on_boarding2/main_ui/on_boarding2.dart';
-import 'package:fluent_hands/layout/app_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -31,8 +30,8 @@ class SwitchAndNext extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                     color: currentPage == index
-                        ? AppColors.orangeColor
-                        : AppColors.orangeColor.withOpacity(0.6)),
+                        ? AppColors.blueColor
+                        : AppColors.blueColor.withOpacity(0.6)),
               ),
             ),
           ),
@@ -41,7 +40,9 @@ class SwitchAndNext extends StatelessWidget {
         ButtonWidget(
           onPressed: () {
             CacheHelper.sharedPreferences.setBool('isFirstTime', false);
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const OnBoarding2(),));
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const OnBoarding2(),
+            ));
           },
           text: AppStrings.next,
         ),

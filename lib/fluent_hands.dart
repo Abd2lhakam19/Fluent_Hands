@@ -1,8 +1,8 @@
 import 'package:fluent_hands/core/theming/app_colors.dart';
-import 'package:fluent_hands/features/splash_screen/ui/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'features/splash_screen/ui/splash_screen.dart';
 
 //import 'features/learn/cubit/learn_cubit.dart';
 
@@ -11,7 +11,6 @@ class FluentHands extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -21,7 +20,8 @@ class FluentHands extends StatelessWidget {
         // onGenerateRoute: appRouter.generateRoute,
         theme: ThemeData(
           scaffoldBackgroundColor: AppColors.scaffoldColor,
-          appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent,elevation: 0),
+          appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.transparent, elevation: 0),
         ),
       ),
     );

@@ -46,7 +46,7 @@ class OnBoarding2 extends StatelessWidget {
               },
               text: AppStrings.signIn,
               backGroundColor: Colors.transparent,
-              borderColor: AppColors.orangeColor,
+              borderColor: AppColors.blueColor,
             ),
             const Gap(16),
             ButtonWidget(
@@ -59,7 +59,7 @@ class OnBoarding2 extends StatelessWidget {
                 );
               },
               text: AppStrings.continueAsAGuest,
-              borderColor: AppColors.orangeColor,
+              borderColor: AppColors.blueColor,
               backGroundColor: Colors.transparent,
             ),
           ],

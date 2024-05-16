@@ -14,7 +14,10 @@ class IllustAndDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SvgPicture.asset(svgPic),
+        SvgPicture.asset(
+          svgPic,
+          fit: BoxFit.cover,
+        ),
         const Gap(56),
         Text(
           dec,

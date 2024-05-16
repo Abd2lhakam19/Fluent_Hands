@@ -27,7 +27,7 @@ class ButtonWidget extends StatelessWidget {
     return TextButton(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(
-          backGroundColor ?? AppColors.orangeColor,
+          backGroundColor ?? AppColors.blueColor,
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
@@ -46,7 +46,10 @@ class ButtonWidget extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         text,
-        style: textStyle ?? TextStyles.medium18BlueBerry,
+        style: textStyle ??
+            TextStyles.medium18BlueBerry.copyWith(
+              color: borderColor != null ? AppColors.blueColor : Colors.white,
+            ),
       ),
     );
   }

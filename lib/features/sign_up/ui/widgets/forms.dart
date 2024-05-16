@@ -8,7 +8,7 @@ import 'package:gap/gap.dart';
 import '../../../../core/widgets/text_field.dart';
 
 class TextForms extends StatefulWidget {
-  TextForms({super.key});
+  const TextForms({super.key});
 
   @override
   State<TextForms> createState() => _TextFormsState();
@@ -26,12 +26,12 @@ class _TextFormsState extends State<TextForms> {
             children: [
               TextFieldWidget(
                 hintText: AppStrings.name,
-                controller: context.read<SignUpCubit>().signUpName,
+                controller: context.read<SignUpCubit>().nameController,
               ),
               const Gap(24),
               TextFieldWidget(
                   hintText: AppStrings.email,
-                  controller: context.read<SignUpCubit>().signUpEmail),
+                  controller: context.read<SignUpCubit>().emailController),
               const Gap(24),
               TextFieldWidget(
                   hintText: AppStrings.password,
@@ -45,7 +45,7 @@ class _TextFormsState extends State<TextForms> {
                     child: Icon(
                         isOpscure ? Icons.visibility_off : Icons.visibility),
                   ),
-                  controller: context.read<SignUpCubit>().signUpPassword),
+                  controller: context.read<SignUpCubit>().passwordController),
               const Gap(24),
               TextFieldWidget(
                   hintText: AppStrings.confirmPassword,
@@ -60,7 +60,7 @@ class _TextFormsState extends State<TextForms> {
                         isOpscure ? Icons.visibility_off : Icons.visibility),
                   ),
                   controller:
-                      context.read<SignUpCubit>().signUpConfirmPassword),
+                      context.read<SignUpCubit>().confirmPasswordController),
             ],
           ),
         );

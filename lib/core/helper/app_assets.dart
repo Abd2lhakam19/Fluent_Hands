@@ -1,5 +1,5 @@
 class AppAssets {
-  static const String svgLogo = "assets/svg/logo.svg",
+  static const String svgLogo = "assets/svg/splash.svg",
       onBoarding1 = "assets/svg/onBoarding1.svg",
       onBoarding2 = "assets/svg/onBoarding2.svg",
       onBoarding3 = "assets/svg/onBoarding3.svg",
@@ -31,5 +31,15 @@ class AppAssets {
       pigHand = "assets/images/pig_hand.png",
       hello = "assets/images/hello.png",
       salam = "assets/images/salam.gif",
-      send = "assets/images/send.png";
+      send = "assets/images/send.png",
+      notification = 'assets/images/notification.png',
+      sign = "assets/images/sign.png",
+      letter = "assets/images/letter.png",
+      fullText = "assets/images/full_text.png",
+      alphabets = 'assets/images/alphabets.png',
+      editProfile = "assets/images/edit_profile.png",
+      volumeUp = 'assets/images/volume_up.png',
+      profileNotification = 'assets/images/profile_notification.png',
+      logOut = 'assets/images/log_out.png',
+      language = 'assets/images/lang.png';
 }

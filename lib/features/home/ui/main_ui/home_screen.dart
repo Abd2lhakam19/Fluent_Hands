@@ -1,11 +1,13 @@
-import 'package:fluent_hands/core/cashe/cashe_helper.dart';
-import 'package:fluent_hands/core/theming/app_colors.dart';
+import 'package:fluent_hands/core/helper/app_assets.dart';
+import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/core/theming/text_styles.dart';
-import 'package:fluent_hands/features/home/ui/widgets/scan_sign.dart';
-import 'package:fluent_hands/features/home/ui/widgets/text_to_sign.dart';
-import 'package:fluent_hands/features/learn/ui/widgets/top_widget.dart';
+import 'package:fluent_hands/features/home/ui/widgets/current_level.dart';
+import 'package:fluent_hands/features/home/ui/widgets/level_widget.dart';
+import 'package:fluent_hands/features/home/ui/widgets/top_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../widgets/bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,184 +17,126 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // List<TopWidget> topWidget = [
-  //   TopWidget(des: "Scan Your\nHand And\nGet The word"),
-  //   TopWidget(des: "Use Our\navatar to\nget the sign")
-  // ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 75.h,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: Text(
+            "Fluent Hands",
+            style: TextStyles.medium24Black,
+          ),
+          actions: [
+            Container(
+                height: 38.h,
+                width: 38.w,
+                decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xffD8DADB)),
+                    shape: BoxShape.circle,
+                    color: Colors.white),
+                child: Image.asset(AppAssets.notification)),
+            SizedBox(
+              width: 20.w,
+            )
+          ],
+        ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 32.h),
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      "Marhaba ",
-                      style: TextStyles.bold24BlueBerry,
-                    ),
-                    SizedBox(
-                      width: 8.w,
-                    ),
-                    // Image.asset(AppAssets.hello),
-                    const Spacer(),
-                    CacheHelper.sharedPreferences.getString('token') != ""
-                        ? GestureDetector(
-                            onTap: () {
-                              CacheHelper.sharedPreferences
-                                  .setBool("isLogIn", false);
-                              CacheHelper.sharedPreferences
-                                  .setString('token', "");
-                              Navigator.pop(context);
-                            },
-                            child: const Icon(
-                              Icons.logout,
-                              color: Colors.red,
-                            ),
-                          )
-                        : const SizedBox.shrink()
-                  ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      TopScreen(
+                        imgPath: AppAssets.sign,
+                        des: AppStrings.convertSignToText,
+                        label: AppStrings.fluentHands,
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) => const SelectBottomSheet(),
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        width: 30.w,
+                      ),
+                      TopScreen(
+                        imgPath: AppAssets.letter,
+                        des: AppStrings.signsDictionary,
+                        label: AppStrings.textToSigns,
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
-                  height: 24.h,
+                  height: 26.h,
                 ),
-                // Container(
-                //  // padding: EdgeInsets.symmetric(horizontal: 5.w),
-                //   clipBehavior: Clip.antiAlias,
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(40)
-                //   ),
-                //     child: Image.asset(AppAssets.salam)),
+                Text(
+                  AppStrings.learning,
+                  style: TextStyles.bold24BlueBerry.copyWith(
+                    color: const Color(0xff252526),
+                    fontSize: 16.sp,
+                  ),
+                ),
                 SizedBox(
-                  height: 24.h,
+                  height: 16.h,
+                ),
+                const CurrentLevel(),
+                SizedBox(
+                  height: 14.h,
+                ),
+                Text(
+                  AppStrings.levels,
+                  style: TextStyles.bold24BlueBerry.copyWith(
+                    color: const Color(0xff252526),
+                    fontSize: 16.sp,
+                  ),
+                ),
+                SizedBox(
+                  height: 14.h,
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      TopWidget(des: "Scan Your\nHand And\nGet The word"),
-                      SizedBox(
-                        width: 20.w,
-                      ),
-                      TopWidget(des: "Use Our\navatar to\nget the sign"),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ScanSign(),
-                          ));
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 14.w, vertical: 12.h),
-                          alignment: Alignment.center,
-                          height: 150.h,
-                          width: 200.w,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(32),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: const Offset(0, 2),
-                                blurRadius: 30,
-                                color: const Color(0xff3a94e7).withOpacity(0.1),
-                              ),
-                            ],
-                          ),
-                          child: Text(
-                            "Sign To Text",
-                            style: TextStyles.bold24BlueBerry
-                                .copyWith(color: AppColors.orangeColor),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
+                      LevelWidget(
+                        num: "1",
+                        lessons: 22,
+                        def: AppStrings.easy,
+                        level: AppStrings.level1,
+                        onPressed: () {},
                       ),
                       SizedBox(
-                        width: 20.w,
+                        width: 17.w,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const TextToSign(),
-                          ));
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 14.w, vertical: 9.h),
-                          alignment: Alignment.center,
-                          height: 150.h,
-                          width: 200.w,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(32),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: const Offset(0, 2),
-                                blurRadius: 30,
-                                color: const Color(0xff3a94e7).withOpacity(0.1),
-                              ),
-                            ],
-                          ),
-                          child: Text(
-                            "Text To Sign",
-                            style: TextStyles.bold24BlueBerry
-                                .copyWith(color: AppColors.orangeColor),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
+                      LevelWidget(
+                        num: "2",
+                        lessons: 22,
+                        def: AppStrings.easy,
+                        level: AppStrings.level2,
+                        onPressed: () {},
+                      ),
+                      SizedBox(
+                        width: 17.w,
+                      ),
+                      LevelWidget(
+                        num: "3",
+                        lessons: 22,
+                        def: AppStrings.easy,
+                        level: AppStrings.level3,
+                        onPressed: () {},
                       ),
                     ],
                   ),
-                ),
-
-                // Center(
-                //   child: ButtonWidget(
-                //     onPressed: () {
-                //       Navigator.of(context).push(MaterialPageRoute(
-                //         builder: (context) => ScanSign(),
-                //       ));
-                //     },
-                //     text: "Scan Your sign",
-                //     textStyle: TextStyles.medium24Black
-                //         .copyWith(color: AppColors.orangeColor, fontSize: 14.sp),
-                //     height: 44.h,
-                //     width: 208.w,
-                //     backGroundColor: Colors.transparent,
-                //     borderColor: AppColors.orangeColor,
-                //   ),
-                // ),
-                // SizedBox(
-                //   height: 50.h,
-                // ),
-                // Center(
-                //   child: ButtonWidget(
-                //     onPressed: () {
-                //       Navigator.of(context).push(MaterialPageRoute(
-                //         builder: (context) => const TextToSign(),
-                //       ));
-                //     },
-                //     text: "Convert Your Text",
-                //     textStyle: TextStyles.medium24Black
-                //         .copyWith(color: AppColors.orangeColor, fontSize: 14.sp),
-                //     height: 44.h,
-                //     width: 208.w,
-                //     backGroundColor: Colors.transparent,
-                //     borderColor: AppColors.orangeColor,
-                //   ),
-                // ),
+                )
               ],
             ),
           ),

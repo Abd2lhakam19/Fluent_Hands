@@ -16,7 +16,6 @@ class OnBoarding1 extends StatefulWidget {
 }
 
 class _OnBoarding1State extends State<OnBoarding1> {
-
   int _currentPage = 0;
   List<OnBoardingModel> screens = [
     OnBoardingModel(
@@ -36,7 +35,7 @@ class _OnBoarding1State extends State<OnBoarding1> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Gap(64),
+            const Gap(50),
             Expanded(
               child: PageView.builder(
                 onPageChanged: (value) {

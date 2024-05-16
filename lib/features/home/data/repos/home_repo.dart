@@ -16,7 +16,7 @@ class HomeRepo {
       final response = await api.post(
         EndPoints.modelBaseUrl + EndPoints.predict,
         data: {
-          "image":await MultipartFile.fromFile(image.path),
+          "image": await MultipartFile.fromFile(image.path),
         },
         isFormData: true,
       );
