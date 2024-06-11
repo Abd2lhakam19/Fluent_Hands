@@ -14,6 +14,8 @@ class TextFieldWidget extends StatelessWidget {
   bool? isOpscure;
   Widget? suffixIcon;
   TextEditingController? controller;
+  Function(String?) validator;
+
   TextFieldWidget(
       {super.key,
       this.hintStyle,
@@ -24,53 +26,61 @@ class TextFieldWidget extends StatelessWidget {
       required this.hintText,
       this.isOpscure,
       this.suffixIcon,
-      this.controller});
+      this.controller,
+      required this.validator(vlaue)});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 48.h,
-      child: TextFormField(
-        decoration: InputDecoration(
-          isDense: true,
-          contentPadding: contentPadding ??
-              EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
-          enabled: true,
-          enabledBorder: enabledBorder ??
-              OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.blueBerry,
-                  width: 0.7.w,
-                ),
-                borderRadius: BorderRadius.circular(30),
+    return TextFormField(
+      decoration: InputDecoration(
+        isDense: true,
+        contentPadding: contentPadding ??
+            EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
+        enabled: true,
+        enabledBorder: enabledBorder ??
+            OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.blueBerry,
+                width: 0.7.w,
               ),
-          focusedBorder: focusedBorder ??
-              OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.blueBerry,
-                  width: 0.7.w,
-                ),
-                borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(30),
+            ),
+        focusedBorder: focusedBorder ??
+            OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.blueBerry,
+                width: 0.7.w,
               ),
-          fillColor: backGroundColor ?? Colors.transparent,
-          filled: true,
-          //hintText: hintText,
-          // hintStyle: hintStyle ?? TextStyles.regular18BlueBerry,
-          suffixIcon: suffixIcon,
-          labelStyle: hintStyle ?? TextStyles.regular18BlueBerry,
-          labelText: hintText,
+              borderRadius: BorderRadius.circular(30),
+            ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 0.7.w,
+          ),
+          borderRadius: BorderRadius.circular(30),
         ),
-        obscureText: isOpscure ?? false,
-        style: TextStyles.medium16BlueBerry,
-        controller: controller,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (textValue) {
-          if (textValue == null || textValue.isEmpty) {
-            return "required";
-          }
-          return null;
-        },
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 0.7.w,
+          ),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        fillColor: backGroundColor ?? Colors.transparent,
+        filled: true,
+        //hintText: hintText,
+        // hintStyle: hintStyle ?? TextStyles.regular18BlueBerry,
+        suffixIcon: suffixIcon,
+        labelStyle: hintStyle ?? TextStyles.regular18BlueBerry,
+        labelText: hintText,
       ),
+      obscureText: isOpscure ?? false,
+      style: TextStyles.medium16BlueBerry,
+      controller: controller,
+      validator: (value) {
+        return validator(value);
+      },
     );
   }
 }

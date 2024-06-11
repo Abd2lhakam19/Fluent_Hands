@@ -3,8 +3,9 @@ class SignUpStates {}
 final class SignUpInitial extends SignUpStates {}
 
 final class SignUpSuccess extends SignUpStates {
-  final String message;
-  SignUpSuccess({required this.message});
+  String successMessage;
+
+  SignUpSuccess({required this.successMessage});
 }
 
 final class SignUpLoading extends SignUpStates {}

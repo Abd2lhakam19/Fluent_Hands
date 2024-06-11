@@ -1,14 +1,13 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:fluent_hands/core/api/dio_consumer.dart';
-import 'package:fluent_hands/core/widgets/button_widget.dart';
 import 'package:fluent_hands/features/home/cubit/home_cubit.dart';
 import 'package:fluent_hands/features/home/cubit/home_states.dart';
 import 'package:fluent_hands/features/home/data/repos/home_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../core/helper/app_assets.dart';
 import '../../../../core/helper/font_weight_helper.dart';
@@ -96,58 +95,15 @@ class _ScanSignState extends State<ScanSign> {
                 res += state.message;
               }
             }
-            showDialog(
+
+            AwesomeDialog(
               context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: const Text("Result"),
-                  elevation: 0.0,
-                  alignment: Alignment.center,
-                  content: Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 50.w, vertical: 60.h),
-                      decoration: BoxDecoration(
-                        color: AppColors.darkWhite,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.stretch,
-                        //  mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          state.message == "not clear"
-                              ? Text(
-                                  "الصورة ليست واضحة",
-                                  style: GoogleFonts.cairo(
-                                    color: const Color(0xff332ba1),
-                                    fontWeight: FontWeightHelper.semiBold,
-                                    fontSize: 24.sp,
-                                  ),
-                                )
-                              : Text(
-                                  res,
-                                  style: GoogleFonts.cairo(
-                                    color: const Color(0xff332ba1),
-                                    fontWeight: FontWeightHelper.semiBold,
-                                    fontSize: 24.sp,
-                                  ),
-                                ),
-                          SizedBox(
-                            height: 35.h,
-                          ),
-                          //  Image.asset(AppAssets.pigHand),
-                        ],
-                      )),
-                  actions: [
-                    ButtonWidget(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        text: "Close")
-                  ],
-                );
-              },
-            );
+              dialogType: DialogType.success,
+              desc: res,
+              btnOkOnPress: () {},
+              btnOkText: "Ok",
+              btnOkColor: AppColors.blueColor,
+            ).show();
           } else if (state is FailureScannedState) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -160,18 +116,7 @@ class _ScanSignState extends State<ScanSign> {
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
-              leading: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    flashed = !flashed;
-                  });
-                },
-                child: ImageIcon(
-                  AssetImage(!flashed ? AppAssets.flashOff : AppAssets.flashOn),
-                  size: 40,
-                  color: Colors.white,
-                ),
-              ),
+              automaticallyImplyLeading: false,
               actions: [
                 GestureDetector(
                     onTap: () {
@@ -203,7 +148,7 @@ class _ScanSignState extends State<ScanSign> {
                 children: [
                   Positioned.fill(
                     child: AspectRatio(
-                      aspectRatio: MediaQuery.of(context).devicePixelRatio,
+                      aspectRatio: MediaQuery.of(context).size.aspectRatio,
                       child: CameraPreview(controller),
                     ),
                   ),
@@ -242,25 +187,16 @@ class _ScanSignState extends State<ScanSign> {
                           onTap: () {
                             takePicture();
                           },
-                          child: const Text(
-                            "ta",
-                            style: TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
-                            ),
-                          ),
-                          //Image.asset(AppAssets.takePhoto
+                          child: Image.asset(AppAssets.takePhoto),
                         ),
                         SizedBox(
                           width: 50.w,
                         ),
                         GestureDetector(
-                          onTap: () {
-                            toggleCamera();
-                          },
-                          child: const Text("rotate"),
-                          //Image.asset(AppAssets.rotateCamera)
-                        ),
+                            onTap: () {
+                              toggleCamera();
+                            },
+                            child: Image.asset(AppAssets.rotateCamera)),
                       ],
                     ),
                   ),

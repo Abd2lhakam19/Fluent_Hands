@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       LevelWidget(
                         num: "2",
                         lessons: 22,
-                        def: AppStrings.easy,
+                        def: AppStrings.interMediate,
                         level: AppStrings.level2,
                         onPressed: () {},
                       ),
@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       LevelWidget(
                         num: "3",
                         lessons: 22,
-                        def: AppStrings.easy,
+                        def: AppStrings.advanced,
                         level: AppStrings.level3,
                         onPressed: () {},
                       ),

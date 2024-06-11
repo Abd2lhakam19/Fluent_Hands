@@ -41,5 +41,6 @@ class AppAssets {
       volumeUp = 'assets/images/volume_up.png',
       profileNotification = 'assets/images/profile_notification.png',
       logOut = 'assets/images/log_out.png',
-      language = 'assets/images/lang.png';
+      language = 'assets/images/lang.png',
+      twitter = 'assets/images/twitter.png';
 }

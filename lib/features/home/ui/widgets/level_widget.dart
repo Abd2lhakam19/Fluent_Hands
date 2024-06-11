@@ -43,65 +43,68 @@ class LevelWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      height: 60.h,
-                      width: 60.w,
-                      decoration: const BoxDecoration(
-                        color: Color(0xffFFF8E7),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Text(
-                        num,
-                        style: TextStyles.medium24Black.copyWith(
-                          fontSize: 45.sp,
-                          color: Colors.black,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        height: 60.h,
+                        width: 60.w,
+                        decoration: const BoxDecoration(
+                          color: Color(0xffFFF8E7),
+                          shape: BoxShape.circle,
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 14.h,
-                    ),
-                    Text(
-                      level,
-                      style: TextStyles.semiBold18BlueBerry,
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          def,
-                          style: TextStyles.regular16BlueBerry.copyWith(
-                            color: const Color(0xff4D4D4F),
-                            fontSize: 12.sp,
+                        child: Text(
+                          num,
+                          style: TextStyles.medium24Black.copyWith(
+                            fontSize: 45.sp,
+                            color: Colors.black,
                           ),
                         ),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        Text(
-                          "$lessons lessons",
-                          style: TextStyles.regular13orange.copyWith(
-                            color: AppColors.blueColor,
-                            fontSize: 10.sp,
+                      ),
+                      SizedBox(
+                        height: 14.h,
+                      ),
+                      Text(
+                        level,
+                        style: TextStyles.semiBold18BlueBerry,
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            def,
+                            style: TextStyles.regular16BlueBerry.copyWith(
+                              color: const Color(0xff4D4D4F),
+                              fontSize: 12.sp,
+                            ),
                           ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(
-                  width: 14.w,
-                ),
-                Image.asset(AppAssets.badge),
-              ],
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Text(
+                            "$lessons lessons",
+                            style: TextStyles.regular13orange.copyWith(
+                              color: AppColors.blueColor,
+                              fontSize: 10.sp,
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  Image.asset(AppAssets.badge),
+                ],
+              ),
             ),
             SizedBox(
               height: 16.h,

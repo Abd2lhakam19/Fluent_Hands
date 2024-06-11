@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../core/helper/app_regex.dart';
 import '../../../../core/widgets/text_field.dart';
 
 class SignInForms extends StatefulWidget {
@@ -21,12 +22,19 @@ class _SignInFormsState extends State<SignInForms> {
     return BlocBuilder<SignInCubit, SignInStates>(
       builder: (context, state) {
         return Form(
-          key: context.read<SignInCubit>().formKey,
+          key: context.read<SignInCubit>().signInFormKey,
           child: Column(
             children: [
               TextFieldWidget(
                 hintText: AppStrings.email,
-                controller: context.read<SignInCubit>().singInEmail,
+                controller: context.read<SignInCubit>().emailController,
+                validator: (vlaue) {
+                  if (vlaue == null ||
+                      vlaue.isEmpty ||
+                      !AppRegex.isEmailValid(vlaue)) {
+                    return "Invalid Email";
+                  }
+                },
               ),
               const Gap(24),
               TextFieldWidget(
@@ -41,7 +49,14 @@ class _SignInFormsState extends State<SignInForms> {
                   child:
                       Icon(isOpscure ? Icons.visibility_off : Icons.visibility),
                 ),
-                controller: context.read<SignInCubit>().singInPassword,
+                controller: context.read<SignInCubit>().passwordController,
+                validator: (vlaue) {
+                  if (vlaue == null ||
+                      vlaue.isEmpty ||
+                      !AppRegex.isPasswordValid(vlaue)) {
+                    return "Invalid Password";
+                  }
+                },
               ),
             ],
           ),

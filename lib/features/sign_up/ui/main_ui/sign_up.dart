@@ -1,21 +1,19 @@
-import 'package:dio/dio.dart';
-import 'package:fluent_hands/core/api/dio_consumer.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:fluent_hands/core/helper/app_assets.dart';
 import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/core/theming/text_styles.dart';
 import 'package:fluent_hands/core/widgets/button_widget.dart';
-import 'package:fluent_hands/features/sign_in/ui/main_ui/sign_in.dart';
 import 'package:fluent_hands/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:fluent_hands/features/sign_up/cubit/sign_up_states.dart';
-import 'package:fluent_hands/features/sign_up/data/repository/sign_up_repo.dart';
 import 'package:fluent_hands/features/sign_up/ui/widgets/already_have.dart';
 import 'package:fluent_hands/features/sign_up/ui/widgets/forms.dart';
-import 'package:fluent_hands/layout/app_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+
+import '../../../../layout/app_layout.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -29,23 +27,30 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (context) =>
-            SignUpCubit(SingUpRepo(api: DioConsumer(dio: Dio()))),
+        create: (context) => SignUpCubit(),
         child: BlocConsumer<SignUpCubit, SignUpStates>(
           listener: (context, state) {
             if (state is SignUpSuccess) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const SignIn(),
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(state.message),
-              ));
+              AwesomeDialog(
+                context: context,
+                dialogType: DialogType.success,
+                title: "Done",
+                desc: state.successMessage,
+                btnOkOnPress: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const AppLayout(),
+                    ),
+                  );
+                },
+              ).show();
             } else if (state is SignUpFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(state.errormessage),
-              ));
+              AwesomeDialog(
+                context: context,
+                dialogType: DialogType.error,
+                title: "Error",
+                desc: state.errormessage,
+              ).show();
             }
           },
           builder: (context, state) {
@@ -64,20 +69,15 @@ class _SignUpState extends State<SignUp> {
                     const Gap(8),
                     SvgPicture.asset(AppAssets.signUp),
                     const Gap(24),
-                    TextForms(),
+                    const TextForms(),
                     const Gap(24),
                     state is SignUpLoading
                         ? const Center(child: CircularProgressIndicator())
                         : ButtonWidget(
                             onPressed: () {
-                              context.read<SignUpCubit>().signUp();
-                              // if (state is SignUpSuccess) {
-                              //   Navigator.of(context).push(
-                              //     MaterialPageRoute(
-                              //       builder: (context) => const AppLayout(),
-                              //     ),
-                              //   );
-                              // }
+                              context
+                                  .read<SignUpCubit>()
+                                  .signUpWithEmailAndPassword(context);
                             },
                             text: AppStrings.signUp,
                           ),

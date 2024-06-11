@@ -1,11 +1,8 @@
-import 'package:dio/dio.dart';
-import 'package:fluent_hands/core/api/dio_consumer.dart';
-import 'package:fluent_hands/core/cashe/cashe_helper.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/features/sign_in/cubit/sign_in_cubit.dart';
 import 'package:fluent_hands/features/sign_in/cubit/sign_in_states.dart';
-import 'package:fluent_hands/features/sign_in/data/repository/sign_in_repo.dart';
 import 'package:fluent_hands/features/sign_in/ui/widgets/dont_have_account.dart';
 import 'package:fluent_hands/features/sign_in/ui/widgets/sign_in_forms.dart';
 import 'package:flutter/material.dart';
@@ -30,25 +27,29 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          SignInCubit(singInRepo: SingInRepo(api: DioConsumer(dio: Dio()))),
+      create: (context) => SignInCubit(),
       child: BlocConsumer<SignInCubit, SignInStates>(
         listener: (context, state) {
           if (state is SignInSuccess) {
-            CacheHelper.sharedPreferences
-                .setString('token', state.response.token);
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const AppLayout(),
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text("Success"),
-            ));
+            AwesomeDialog(
+                context: context,
+                dialogType: DialogType.success,
+                title: "Done",
+                desc: state.successMessage,
+                btnOkOnPress: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const AppLayout(),
+                    ),
+                  );
+                }).show();
           } else if (state is SignInFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(state.errormessage),
-            ));
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              title: "Error",
+              desc: state.errormessage,
+            ).show();
           }
         },
         builder: (context, state) {
@@ -84,7 +85,9 @@ class _SignInState extends State<SignIn> {
                           )
                         : ButtonWidget(
                             onPressed: () {
-                              context.read<SignInCubit>().signIn();
+                              context
+                                  .read<SignInCubit>()
+                                  .signInWithEmailAndPassword(context);
                             },
                             text: AppStrings.signIn,
                           ),
@@ -106,11 +109,18 @@ class _SignInState extends State<SignIn> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          width: 24.w,
-                          height: 24.h,
-                          child: Image.asset(
-                            AppAssets.googleIcon,
+                        GestureDetector(
+                          onTap: () {
+                            context
+                                .read<SignInCubit>()
+                                .signInWithGoogle(context);
+                          },
+                          child: SizedBox(
+                            width: 24.w,
+                            height: 24.h,
+                            child: Image.asset(
+                              AppAssets.googleIcon,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -124,6 +134,24 @@ class _SignInState extends State<SignIn> {
                           },
                           child: const Icon(
                             Icons.facebook_rounded,
+                            color: AppColors.blueColor,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20.w,
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            await context
+                                .read<SignInCubit>()
+                                .signInWithTwitter(context);
+                          },
+                          child: SizedBox(
+                            width: 24.w,
+                            height: 24.h,
+                            child: Image.asset(
+                              AppAssets.twitter,
+                            ),
                           ),
                         )
                       ],

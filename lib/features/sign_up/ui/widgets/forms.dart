@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../core/helper/app_regex.dart';
 import '../../../../core/widgets/text_field.dart';
 
 class TextForms extends StatefulWidget {
@@ -25,13 +26,24 @@ class _TextFormsState extends State<TextForms> {
           child: Column(
             children: [
               TextFieldWidget(
-                hintText: AppStrings.name,
-                controller: context.read<SignUpCubit>().nameController,
-              ),
+                  hintText: AppStrings.name,
+                  controller: context.read<SignUpCubit>().nameController,
+                  validator: (vlaue) {
+                    if (vlaue == null || vlaue.isEmpty) {
+                      return "Invalid Name";
+                    }
+                  }),
               const Gap(24),
               TextFieldWidget(
                   hintText: AppStrings.email,
-                  controller: context.read<SignUpCubit>().emailController),
+                  controller: context.read<SignUpCubit>().emailController,
+                  validator: (vlaue) {
+                    if (vlaue == null ||
+                        vlaue.isEmpty ||
+                        !AppRegex.isEmailValid(vlaue)) {
+                      return "Invalid Email";
+                    }
+                  }),
               const Gap(24),
               TextFieldWidget(
                   hintText: AppStrings.password,
@@ -45,7 +57,14 @@ class _TextFormsState extends State<TextForms> {
                     child: Icon(
                         isOpscure ? Icons.visibility_off : Icons.visibility),
                   ),
-                  controller: context.read<SignUpCubit>().passwordController),
+                  controller: context.read<SignUpCubit>().passwordController,
+                  validator: (vlaue) {
+                    if (vlaue == null ||
+                        vlaue.isEmpty ||
+                        !AppRegex.isPasswordValid(vlaue)) {
+                      return "Invalid Password";
+                    }
+                  }),
               const Gap(24),
               TextFieldWidget(
                   hintText: AppStrings.confirmPassword,
@@ -60,7 +79,14 @@ class _TextFormsState extends State<TextForms> {
                         isOpscure ? Icons.visibility_off : Icons.visibility),
                   ),
                   controller:
-                      context.read<SignUpCubit>().confirmPasswordController),
+                      context.read<SignUpCubit>().confirmPasswordController,
+                  validator: (vlaue) {
+                    if (vlaue == null ||
+                        vlaue.isEmpty ||
+                        !AppRegex.isPasswordValid(vlaue)) {
+                      return "Invalid Password";
+                    }
+                  }),
             ],
           ),
         );

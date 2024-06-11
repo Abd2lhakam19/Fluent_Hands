@@ -18,8 +18,8 @@ def classify_video():
     video_file.save(video_path)
     
     # Perform video classification
-    classifications = video_cls(video_path, top_k=1)  # Only get the top score label
-    
+    classifications = video_cls(video_path, top_k=5)  # Only get the top score label
+
     # Extract the top label from the classification results
     top_label = classifications[0]['label']
     
