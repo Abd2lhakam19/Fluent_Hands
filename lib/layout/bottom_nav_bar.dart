@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_hands/core/helper/app_assets.dart';
-import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/core/theming/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -46,11 +46,11 @@ class CustomBottomNavBar extends StatelessWidget {
                 const Gap(6),
                 Text(
                   index == 0 && selectedIndex == index
-                      ? AppStrings.home
+                      ? 'home'.tr()
                       : index == 1 && selectedIndex == index
-                          ? AppStrings.settings
+                          ? 'settings'.tr()
                           : selectedIndex == index
-                              ? AppStrings.profile
+                              ? 'profile'.tr()
                               : "",
                   style: TextStyles.regular13orange.copyWith(
                     color: AppColors.blueColor,

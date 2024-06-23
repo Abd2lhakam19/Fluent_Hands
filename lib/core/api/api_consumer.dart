@@ -9,7 +9,7 @@ abstract class ApiConsumer {
   });
   Future<dynamic> post(
     String path, {
-    dynamic? data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     bool isFormData = false,
     Options? options,

@@ -22,7 +22,6 @@ class SignUpCubit extends Cubit<SignUpStates> {
     final form = singUpFormKey.currentState;
     if (form!.validate()) {
       emit(SignUpLoading());
-      final name = nameController.text;
       final email = emailController.text;
       final password = passwordController.text;
       final confirmPassword = confirmPasswordController.text;

@@ -1,16 +1,12 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:fluent_hands/core/api/api_consumer.dart';
 import 'package:fluent_hands/core/api/api_interceptors.dart';
-import 'package:fluent_hands/core/api/end_points.dart';
 import 'package:fluent_hands/core/error/exceptions.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio dio;
 
   DioConsumer({required this.dio}) {
-
     dio.interceptors.add(ApiInterceptor());
     dio.interceptors.add(
       LogInterceptor(
@@ -48,7 +44,7 @@ class DioConsumer extends ApiConsumer {
     Options? options,
   }) async {
     try {
-      final response = await dio.get(path,options: options);
+      final response = await dio.get(path, options: options);
       return response.data;
     } on DioException catch (e) {
       handleDioExceptions(e);
@@ -70,18 +66,16 @@ class DioConsumer extends ApiConsumer {
   @override
   Future post(
     String path, {
-    dynamic? data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     bool isFormData = false,
     Options? options,
   }) async {
     try {
-      final response = await dio.post(
-        path,
-        data: isFormData ? FormData.fromMap(data) : data,
-        queryParameters: queryParameters,
-        options: options
-      );
+      final response = await dio.post(path,
+          data: isFormData ? FormData.fromMap(data) : data,
+          queryParameters: queryParameters,
+          options: options);
       return response.data;
     } on DioException catch (e) {
       handleDioExceptions(e);

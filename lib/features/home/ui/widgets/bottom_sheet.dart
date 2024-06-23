@@ -1,5 +1,6 @@
-import 'package:fluent_hands/core/helper/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_hands/features/home/ui/widgets/scan_sign.dart';
+import 'package:fluent_hands/features/home/ui/widgets/training_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,6 +8,7 @@ import '../../../../core/helper/app_assets.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../../core/widgets/button_widget.dart';
+import 'full_text_scan.dart';
 
 class SelectBottomSheet extends StatefulWidget {
   const SelectBottomSheet({super.key});
@@ -18,6 +20,7 @@ class SelectBottomSheet extends StatefulWidget {
 class _SelectBottomSheetState extends State<SelectBottomSheet> {
   bool fulTextSelected = false;
   bool alphabetsSelected = false;
+  bool isTrainigOn = false;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -29,7 +32,7 @@ class _SelectBottomSheetState extends State<SelectBottomSheet> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              AppStrings.pickYourOption,
+              'pick_your_option'.tr(),
               style: TextStyles.medium18BlueBerry.copyWith(
                 color: AppColors.blueColor,
                 fontSize: 24.sp,
@@ -50,8 +53,8 @@ class _SelectBottomSheetState extends State<SelectBottomSheet> {
                   child: Column(
                     children: [
                       Container(
-                        height: 169.h,
-                        width: 155.w,
+                        height: 150.h,
+                        width: 150.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                             12,
@@ -70,30 +73,31 @@ class _SelectBottomSheetState extends State<SelectBottomSheet> {
                         height: 10.h,
                       ),
                       Text(
-                        AppStrings.fullText,
+                        'full_text'.tr(),
                         style: TextStyles.medium18BlueBerry.copyWith(
                           color: AppColors.blueColor,
-                          fontSize: 20.sp,
+                          fontSize: 16.sp,
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  width: 30.w,
-                ),
-                Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          alphabetsSelected = !alphabetsSelected;
-                          fulTextSelected = false;
-                        });
-                      },
-                      child: Container(
-                        height: 169.h,
-                        width: 155.w,
+                // SizedBox(
+                //   width: 35.w,
+                // ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      alphabetsSelected = !alphabetsSelected;
+                      fulTextSelected = false;
+                    });
+                  },
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 150.h,
+                        width: 150.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                             12,
@@ -108,39 +112,109 @@ class _SelectBottomSheetState extends State<SelectBottomSheet> {
                           AppAssets.alphabets,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Text(
-                      AppStrings.alphabets,
-                      style: TextStyles.medium18BlueBerry.copyWith(
-                        color: AppColors.blueColor,
-                        fontSize: 20.sp,
+                      SizedBox(
+                        height: 10.h,
                       ),
-                    ),
-                  ],
+                      Text(
+                        'alphabets'.tr(),
+                        style: TextStyles.medium18BlueBerry.copyWith(
+                          color: AppColors.blueColor,
+                          fontSize: 16.sp,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
             SizedBox(
-              height: 30.h,
+              height: 25.h,
+            ),
+            // Checkbox(value: true, onChanged: (value) {}),
+            Row(
+              children: [
+                Text(
+                  'Apply Training'.tr(),
+                  style: TextStyles.regular16orange.copyWith(
+                    color: const Color(0xff120D02),
+                  ),
+                ),
+                const Spacer(),
+                Transform.scale(
+                  scale: 0.7,
+                  child: SizedBox(
+                    height: 17.h,
+                    width: 32.w,
+                    child: Switch(
+                      activeColor: Colors.white,
+                      activeTrackColor: const Color(0xff006AFF),
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      value: isTrainigOn,
+                      onChanged: (value) {
+                        setState(() {
+                          isTrainigOn = !isTrainigOn;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40.h,
             ),
             ButtonWidget(
               width: 295.w,
               height: 44.h,
               backGroundColor: AppColors.blueColor,
               onPressed: () {
-                if (alphabetsSelected && !fulTextSelected) {
+                if (alphabetsSelected && !fulTextSelected && !isTrainigOn) {
                   setState(() {
                     alphabetsSelected = !alphabetsSelected;
                   });
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ScanSign(),
+                    builder: (context) => ScanSign(
+                      training: false,
+                    ),
+                  ));
+                } else if (fulTextSelected &&
+                    !alphabetsSelected &&
+                    !isTrainigOn) {
+                  setState(() {
+                    fulTextSelected = !fulTextSelected;
+                  });
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => FullTextScan(
+                      training: false,
+                    ),
+                  ));
+                } else if (fulTextSelected &&
+                    !alphabetsSelected &&
+                    isTrainigOn) {
+                  setState(() {
+                    fulTextSelected = !fulTextSelected;
+                    isTrainigOn = !isTrainigOn;
+                  });
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => TrainingScreen(
+                      typeList: "Full Text",
+                    ),
+                  ));
+                } else if (alphabetsSelected &&
+                    !fulTextSelected &&
+                    isTrainigOn) {
+                  setState(() {
+                    alphabetsSelected = !alphabetsSelected;
+                    isTrainigOn = !isTrainigOn;
+                  });
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => TrainingScreen(
+                      typeList: "Alphabets",
+                    ),
                   ));
                 }
               },
-              text: "Start Session",
+              text: "start_session".tr(),
               textStyle: TextStyles.bold14BlueBerry.copyWith(
                 color: Colors.white,
               ),

@@ -9,6 +9,7 @@ class HomeCubit extends Cubit<HomeStates> {
   HomeRepo homeRepo;
   Dio dio = Dio();
   XFile? imageFile;
+  XFile? videoFile;
 
   Map<String, String> arabicAlphabets = {
     'أ': 'حرف الألف',
@@ -64,5 +65,17 @@ class HomeCubit extends Cubit<HomeStates> {
       ),
     );
     print(response);
+  }
+
+  videoPredict() async {
+    emit(LoadingRecordingState());
+
+    final response = await homeRepo.getWordPredict(videoPath: videoFile!);
+    response.fold(
+      (errorMessage) => emit(FailureRecordingState()),
+      (homeModel) => emit(
+        SuccessRecordingState(message: homeModel.result),
+      ),
+    );
   }
 }

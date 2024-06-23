@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_hands/core/api/dio_consumer.dart';
 import 'package:fluent_hands/features/home/cubit/home_cubit.dart';
 import 'package:fluent_hands/features/home/cubit/home_states.dart';
@@ -16,7 +17,39 @@ import '../../../../core/theming/text_styles.dart';
 import '../../../../main.dart';
 
 class ScanSign extends StatefulWidget {
-  const ScanSign({super.key});
+  ScanSign({super.key, required this.training, this.word});
+  bool training;
+  String? word;
+  final Map<String, String> alphabets = {
+    'حرف الالف': 'أ',
+    'حرف الباء': "ب",
+    'حرف التاء': "ت",
+    'حرف الثاء': "ث",
+    'حرف الجيم': "ج",
+    'حرف الحاء': "ح",
+    'حرف الخاء': "خ",
+    'حرف الدال': "د",
+    'حرف الذال': "ذ",
+    'حرف الراء': "ر",
+    'حرف الزاي': "ز",
+    'حرف السين': "س",
+    'حرف الشين': "ش",
+    'حرف الصاد': "ص",
+    'حرف الضاد': "ض",
+    'حرف الطاء': "ط",
+    'حرف الظاء': "ظ",
+    'حرف العين': "ع",
+    'حرف الغين': "غ",
+    'حرف الفاء': "ف",
+    'حرف القاف': "ق",
+    'حرف الكاف': "ك",
+    'حرف اللام': "ل",
+    'حرف الميم': "م",
+    'حرف النون': "ن",
+    'حرف الهاء': "ه",
+    'حرف الواو': "و",
+    'حرف الياء': "ي",
+  };
 
   @override
   State<ScanSign> createState() => _ScanSignState();
@@ -87,7 +120,7 @@ class _ScanSignState extends State<ScanSign> {
     return BlocConsumer<HomeCubit, HomeStates>(
         bloc: homeCubit,
         listener: (context, state) {
-          if (state is SuccessScannedState) {
+          if (state is SuccessScannedState && widget.training == false) {
             if (state.message != "not clear") {
               if (state.message == "أ" && res.isNotEmpty) {
                 res += "ا";
@@ -104,6 +137,28 @@ class _ScanSignState extends State<ScanSign> {
               btnOkText: "Ok",
               btnOkColor: AppColors.blueColor,
             ).show();
+          } else if (state is SuccessScannedState &&
+              widget.training == true &&
+              widget.word != null) {
+            if (state.message != "not clear") {
+              if (state.message == widget.alphabets[widget.word!]) {
+                AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.success,
+                  desc: "أحسنت لقد أديت الحرف بشكل صحيح",
+                  btnOkOnPress: () {},
+                  btnOkText: "Ok",
+                  btnOkColor: AppColors.blueColor,
+                ).show();
+              } else if (state.message != widget.alphabets[widget.word!]) {
+                AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.error,
+                  desc: "من فضلك تدرب على الحرف جيدا وحاول مرة أخرى",
+                  btnCancelOnPress: () {},
+                ).show();
+              }
+            }
           } else if (state is FailureScannedState) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -126,7 +181,7 @@ class _ScanSignState extends State<ScanSign> {
               ],
               centerTitle: true,
               title: Text(
-                "Scan",
+                "Scan".tr(),
                 style: TextStyles.medium24Black.copyWith(
                     color: Colors.white, fontWeight: FontWeightHelper.semiBold),
               ),
@@ -157,8 +212,6 @@ class _ScanSignState extends State<ScanSign> {
                     bottom: 50,
                     left: 10,
                     child: Row(
-                      //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //  mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
                           width: 50.w,

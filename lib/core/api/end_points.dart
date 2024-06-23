@@ -1,22 +1,12 @@
 import 'dart:convert';
 
 class EndPoints {
-  static String baseUrl = "http://ziadsalah9-001-site1.anytempurl.com";
-  static String signUp = "/api/Account/Register";
-  static String signIn = "/api/Account/Login";
   static String twitterApiKey = "fRhu55hab49mgIdgvoil5z4KN";
   static String twitterApiSecretKey =
-      "jLlsh1MtQJPENNXCC5pzrqJJoyRCIEQCAjntl5SEDVAVErsz2g";
-  static String getCategoryDirections =
-          "/api/LearningCategoryDirections/getallDirectionsRecoreds",
-      getCategoryWelcome =
-          "/api/LearningCategoryWelcome/getallWelcomesRecoreds",
-      getCategoryGeneral =
-          "/api/LearningGeneralWordsCategory/getallGeneralWordsRecoreds",
-      getCategoryTraffic =
-          "/api/LearningTrafficAndTransPortCategory/getallTrafficRecoreds",
+          "jLlsh1MtQJPENNXCC5pzrqJJoyRCIEQCAjntl5SEDVAVErsz2g",
       modelBaseUrl = "http://localhost:5000",
-      predict = "/recognize";
+      predict = "/recognize",
+      videoPredict = "/classify_video";
   static String basicAuth =
       'Basic ${base64Encode(utf8.encode('11165423:60-dayfreetrial'))}';
 }

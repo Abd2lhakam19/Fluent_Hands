@@ -57,7 +57,7 @@ class SignInCubit extends Cubit<SignInStates> {
       } else {
         return Future.value(false);
       }
-    } on SocketException catch (e) {
+    } on SocketException {
       return Future.value(false);
     }
   }
@@ -76,6 +76,7 @@ class SignInCubit extends Cubit<SignInStates> {
         await FirebaseAuth.instance.signInWithCredential(credential);
         CacheHelper.sharedPreferences.setBool('isLogIn', true);
         await AwesomeDialog(
+          // ignore: use_build_context_synchronously
           context: context,
           autoHide: const Duration(seconds: 2),
           showCloseIcon: true,
@@ -85,6 +86,7 @@ class SignInCubit extends Cubit<SignInStates> {
           desc: 'Sign in with Facebook done',
         ).show();
         provider = "facebook";
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => const AppLayout(),
@@ -92,6 +94,7 @@ class SignInCubit extends Cubit<SignInStates> {
         );
       } else {
         await AwesomeDialog(
+          // ignore: use_build_context_synchronously
           context: context,
           dialogType: DialogType.warning,
           title: 'No internet',
@@ -101,6 +104,7 @@ class SignInCubit extends Cubit<SignInStates> {
     } on PlatformException catch (e) {
       if (e.code == '400' && e.message == 'Failed to generate request token.') {
         await AwesomeDialog(
+          // ignore: use_build_context_synchronously
           context: context,
           dialogType: DialogType.warning,
           title: 'No internet',

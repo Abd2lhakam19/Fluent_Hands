@@ -1,17 +1,12 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/features/sign_in/cubit/sign_in_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../../../core/cashe/cashe_helper.dart';
 import '../../../../core/helper/app_assets.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../sign_in/ui/main_ui/sign_in.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -93,9 +88,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SingleChildScrollView(
                 child: Container(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.h),
                   width: 343.w,
-                  height: 252.h,
+                  height: 190.h,
                   decoration: BoxDecoration(
                     color: const Color(0xffFDFDFD),
                     borderRadius: BorderRadius.circular(24),
@@ -111,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: 12.w,
                           ),
                           Text(
-                            AppStrings.editProfile,
+                            'edit_profile'.tr(),
                             style: TextStyles.regular16orange.copyWith(
                               color: const Color(0xff120D02),
                             ),
@@ -132,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: 12.w,
                           ),
                           Text(
-                            AppStrings.notification,
+                            'notification'.tr(),
                             style: TextStyles.regular16orange.copyWith(
                               color: const Color(0xff120D02),
                             ),
@@ -171,7 +166,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: 12.w,
                           ),
                           Text(
-                            AppStrings.sounds,
+                            'sounds'.tr(),
                             style: TextStyles.regular16orange.copyWith(
                               color: const Color(0xff120D02),
                             ),
@@ -200,67 +195,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       SizedBox(
                         height: 28.h,
-                      ),
-                      Row(
-                        children: [
-                          Image.asset(
-                            AppAssets.language,
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          Text(
-                            AppStrings.languages,
-                            style: TextStyles.regular16orange.copyWith(
-                              color: const Color(0xff120D02),
-                            ),
-                          ),
-                          const Spacer(),
-                          const Icon(Icons.arrow_forward_ios)
-                        ],
-                      ),
-                      SizedBox(
-                        height: 28.h,
-                      ),
-                      Row(
-                        children: [
-                          Image.asset(
-                            AppAssets.logOut,
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              AwesomeDialog(
-                                  context: context,
-                                  dialogType: DialogType.question,
-                                  animType: AnimType.topSlide,
-                                  desc: "Are you sure you want to log out?",
-                                  title: AppStrings.logOut,
-                                  btnCancelOnPress: () {},
-                                  btnOkOnPress: () async {
-                                    await GoogleSignIn().signOut();
-                                    await FacebookAuth.instance.logOut();
-                                    await FirebaseAuth.instance.signOut();
-                                    CacheHelper.sharedPreferences
-                                        .setBool('isLogIn', false);
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                        builder: (context) => const SignIn(),
-                                      ),
-                                    );
-                                  }).show();
-                            },
-                            child: Text(
-                              AppStrings.logOut,
-                              style: TextStyles.regular16orange.copyWith(
-                                color: const Color(0xff120D02),
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                        ],
                       ),
                     ],
                   ),

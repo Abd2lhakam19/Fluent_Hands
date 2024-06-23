@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_hands/core/helper/app_assets.dart';
-import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/core/theming/text_styles.dart';
 import 'package:fluent_hands/features/home/ui/widgets/current_level.dart';
 import 'package:fluent_hands/features/home/ui/widgets/level_widget.dart';
@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/bottom_sheet.dart';
+import '../widgets/contribute_with_us.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,14 +31,17 @@ class _HomeScreenState extends State<HomeScreen> {
             style: TextStyles.medium24Black,
           ),
           actions: [
-            Container(
-                height: 38.h,
-                width: 38.w,
-                decoration: BoxDecoration(
-                    border: Border.all(color: const Color(0xffD8DADB)),
-                    shape: BoxShape.circle,
-                    color: Colors.white),
-                child: Image.asset(AppAssets.notification)),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                  height: 38.h,
+                  width: 38.w,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: const Color(0xffD8DADB)),
+                      shape: BoxShape.circle,
+                      color: Colors.white),
+                  child: Image.asset(AppAssets.notification)),
+            ),
             SizedBox(
               width: 20.w,
             )
@@ -55,8 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       TopScreen(
                         imgPath: AppAssets.sign,
-                        des: AppStrings.convertSignToText,
-                        label: AppStrings.fluentHands,
+                        des: 'converts_sign_language_to_text'.tr(),
+                        label: 'fluent_hands'.tr(),
                         onPressed: () {
                           showModalBottomSheet(
                             context: context,
@@ -69,9 +73,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       TopScreen(
                         imgPath: AppAssets.letter,
-                        des: AppStrings.signsDictionary,
-                        label: AppStrings.textToSigns,
-                        onPressed: () {},
+                        des: 'signs_dictionary'.tr(),
+                        label: 'contribute_with_us'.tr(),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ContributeWithUs(),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -80,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 26.h,
                 ),
                 Text(
-                  AppStrings.learning,
+                  'learning'.tr(),
                   style: TextStyles.bold24BlueBerry.copyWith(
                     color: const Color(0xff252526),
                     fontSize: 16.sp,
@@ -94,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 14.h,
                 ),
                 Text(
-                  AppStrings.levels,
+                  'levels'.tr(),
                   style: TextStyles.bold24BlueBerry.copyWith(
                     color: const Color(0xff252526),
                     fontSize: 16.sp,
@@ -110,9 +120,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       LevelWidget(
                         num: "1",
                         lessons: 22,
-                        def: AppStrings.easy,
-                        level: AppStrings.level1,
-                        onPressed: () {},
+                        def: 'easy'.tr(),
+                        level: 'level_one'.tr(),
                       ),
                       SizedBox(
                         width: 17.w,
@@ -120,9 +129,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       LevelWidget(
                         num: "2",
                         lessons: 22,
-                        def: AppStrings.interMediate,
-                        level: AppStrings.level2,
-                        onPressed: () {},
+                        def: 'medium'.tr(),
+                        level: 'level_two'.tr(),
                       ),
                       SizedBox(
                         width: 17.w,
@@ -130,9 +138,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       LevelWidget(
                         num: "3",
                         lessons: 22,
-                        def: AppStrings.advanced,
-                        level: AppStrings.level3,
-                        onPressed: () {},
+                        def: 'hard'.tr(),
+                        level: 'level_three'.tr(),
                       ),
                     ],
                   ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:fluent_hands/features/sign_up/cubit/sign_up_states.dart';
@@ -26,27 +27,27 @@ class _TextFormsState extends State<TextForms> {
           child: Column(
             children: [
               TextFieldWidget(
-                  hintText: AppStrings.name,
+                  hintText: AppStrings.name.tr(),
                   controller: context.read<SignUpCubit>().nameController,
                   validator: (vlaue) {
                     if (vlaue == null || vlaue.isEmpty) {
-                      return "Invalid Name";
+                      return "Invalid Name".tr();
                     }
                   }),
               const Gap(24),
               TextFieldWidget(
-                  hintText: AppStrings.email,
+                  hintText: AppStrings.email.tr(),
                   controller: context.read<SignUpCubit>().emailController,
                   validator: (vlaue) {
                     if (vlaue == null ||
                         vlaue.isEmpty ||
                         !AppRegex.isEmailValid(vlaue)) {
-                      return "Invalid Email";
+                      return "Invalid Email".tr();
                     }
                   }),
               const Gap(24),
               TextFieldWidget(
-                  hintText: AppStrings.password,
+                  hintText: AppStrings.password.tr(),
                   isOpscure: isOpscure,
                   suffixIcon: GestureDetector(
                     onTap: () {
@@ -62,12 +63,12 @@ class _TextFormsState extends State<TextForms> {
                     if (vlaue == null ||
                         vlaue.isEmpty ||
                         !AppRegex.isPasswordValid(vlaue)) {
-                      return "Invalid Password";
+                      return "Invalid Password".tr();
                     }
                   }),
               const Gap(24),
               TextFieldWidget(
-                  hintText: AppStrings.confirmPassword,
+                  hintText: AppStrings.confirmPassword.tr(),
                   isOpscure: isOpscure,
                   suffixIcon: GestureDetector(
                     onTap: () {
@@ -84,7 +85,7 @@ class _TextFormsState extends State<TextForms> {
                     if (vlaue == null ||
                         vlaue.isEmpty ||
                         !AppRegex.isPasswordValid(vlaue)) {
-                      return "Invalid Password";
+                      return "Invalid Password".tr();
                     }
                   }),
             ],

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/core/theming/text_styles.dart';
@@ -14,7 +15,7 @@ class AlreadyHave extends StatelessWidget {
       textAlign: TextAlign.center,
       text: TextSpan(children: [
         TextSpan(
-          text: AppStrings.alreadyHave,
+          text: AppStrings.alreadyHave.tr(),
           style: TextStyles.regular16BlueBerry,
         ),
         TextSpan(
@@ -23,7 +24,7 @@ class AlreadyHave extends StatelessWidget {
                 () => Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => const SignIn(),
                     )),
-          text: AppStrings.signIn,
+          text: AppStrings.signIn.tr(),
           style: TextStyles.regular16orange.copyWith(
             color: AppColors.blueColor,
           ),

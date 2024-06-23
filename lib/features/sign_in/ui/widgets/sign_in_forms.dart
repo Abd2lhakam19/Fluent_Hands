@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/features/sign_in/cubit/sign_in_cubit.dart';
 import 'package:fluent_hands/features/sign_in/cubit/sign_in_states.dart';
@@ -26,19 +27,19 @@ class _SignInFormsState extends State<SignInForms> {
           child: Column(
             children: [
               TextFieldWidget(
-                hintText: AppStrings.email,
+                hintText: AppStrings.email.tr(),
                 controller: context.read<SignInCubit>().emailController,
                 validator: (vlaue) {
                   if (vlaue == null ||
                       vlaue.isEmpty ||
                       !AppRegex.isEmailValid(vlaue)) {
-                    return "Invalid Email";
+                    return "Invalid Email".tr();
                   }
                 },
               ),
               const Gap(24),
               TextFieldWidget(
-                hintText: AppStrings.password,
+                hintText: AppStrings.password.tr(),
                 isOpscure: isOpscure,
                 suffixIcon: GestureDetector(
                   onTap: () {
@@ -54,7 +55,7 @@ class _SignInFormsState extends State<SignInForms> {
                   if (vlaue == null ||
                       vlaue.isEmpty ||
                       !AppRegex.isPasswordValid(vlaue)) {
-                    return "Invalid Password";
+                    return "Invalid Password".tr();
                   }
                 },
               ),

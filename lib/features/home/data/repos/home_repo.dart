@@ -26,4 +26,21 @@ class HomeRepo {
       return left(e.errorModel.errorMessage);
     }
   }
+
+  Future<Either<String, HomeModel>> getWordPredict(
+      {required XFile videoPath}) async {
+    try {
+      final response = await api.post(
+        EndPoints.modelBaseUrl + EndPoints.videoPredict,
+        data: {
+          "video": await MultipartFile.fromFile(videoPath.path),
+        },
+        isFormData: true,
+      );
+      final model = HomeModel.fromJson(response);
+      return right(model);
+    } on ServerException catch (e) {
+      return left(e.errorModel.errorMessage);
+    }
+  }
 }

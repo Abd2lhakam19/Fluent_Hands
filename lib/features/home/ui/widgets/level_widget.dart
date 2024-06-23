@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -5,7 +6,9 @@ import '../../../../core/helper/app_assets.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../../core/widgets/button_widget.dart';
+import 'view_level_screen.dart';
 
+// ignore: must_be_immutable
 class LevelWidget extends StatelessWidget {
   LevelWidget({
     super.key,
@@ -13,13 +16,11 @@ class LevelWidget extends StatelessWidget {
     required this.lessons,
     required this.def,
     required this.level,
-    required this.onPressed,
   });
   String num;
   String level;
   String def;
   int lessons;
-  VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +71,7 @@ class LevelWidget extends StatelessWidget {
                         height: 14.h,
                       ),
                       Text(
-                        level,
+                        level.tr(),
                         style: TextStyles.semiBold18BlueBerry,
                       ),
                       SizedBox(
@@ -79,7 +80,7 @@ class LevelWidget extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            def,
+                            def.tr(),
                             style: TextStyles.regular16BlueBerry.copyWith(
                               color: const Color(0xff4D4D4F),
                               fontSize: 12.sp,
@@ -114,8 +115,18 @@ class LevelWidget extends StatelessWidget {
               width: 208.w,
               backGroundColor: Colors.transparent,
               borderColor: AppColors.blueColor,
-              onPressed: onPressed,
-              text: "View Level",
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ViewLevelScreen(
+                      def: def,
+                      level: level,
+                      lessons: lessons,
+                    ),
+                  ),
+                );
+              },
+              text: "view_level".tr(),
               textStyle: TextStyles.regular16BlueBerry.copyWith(
                 color: AppColors.blueColor,
               ),

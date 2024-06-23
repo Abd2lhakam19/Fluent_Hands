@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/features/sign_in/cubit/sign_in_cubit.dart';
@@ -34,8 +35,8 @@ class _SignInState extends State<SignIn> {
             AwesomeDialog(
                 context: context,
                 dialogType: DialogType.success,
-                title: "Done",
-                desc: state.successMessage,
+                title: "Done".tr(),
+                desc: state.successMessage.tr(),
                 btnOkOnPress: () {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
@@ -47,8 +48,8 @@ class _SignInState extends State<SignIn> {
             AwesomeDialog(
               context: context,
               dialogType: DialogType.error,
-              title: "Error",
-              desc: state.errormessage,
+              title: "Error".tr(),
+              desc: state.errormessage.tr(),
             ).show();
           }
         },
@@ -62,7 +63,7 @@ class _SignInState extends State<SignIn> {
                   children: [
                     const Gap(64),
                     Text(
-                      AppStrings.signIn,
+                      AppStrings.signIn.tr(),
                       style: TextStyles.bold24BlueBerry,
                       textAlign: TextAlign.center,
                     ),
@@ -89,7 +90,7 @@ class _SignInState extends State<SignIn> {
                                   .read<SignInCubit>()
                                   .signInWithEmailAndPassword(context);
                             },
-                            text: AppStrings.signIn,
+                            text: AppStrings.signIn.tr(),
                           ),
                     const Gap(16),
                     const DontHaveAccount(),
@@ -101,7 +102,7 @@ class _SignInState extends State<SignIn> {
                     ),
                     const Gap(24),
                     Text(
-                      AppStrings.orSignInWith,
+                      AppStrings.orSignInWith.tr(),
                       style: TextStyles.semiBold18BlueBerry,
                       textAlign: TextAlign.center,
                     ),

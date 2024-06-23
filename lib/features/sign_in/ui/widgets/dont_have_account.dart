@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/features/sign_up/ui/main_ui/sign_up.dart';
 import 'package:flutter/gestures.dart';
@@ -15,7 +16,7 @@ class DontHaveAccount extends StatelessWidget {
       textAlign: TextAlign.center,
       text: TextSpan(children: [
         TextSpan(
-          text: AppStrings.doNotHaveAccount,
+          text: AppStrings.doNotHaveAccount.tr(),
           style: TextStyles.regular16BlueBerry,
         ),
         TextSpan(
@@ -24,7 +25,7 @@ class DontHaveAccount extends StatelessWidget {
                 () => Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => const SignUp(),
                     )),
-          text: AppStrings.signUp,
+          text: AppStrings.signUp.tr(),
           style: TextStyles.regular16orange.copyWith(
             color: AppColors.blueColor,
           ),

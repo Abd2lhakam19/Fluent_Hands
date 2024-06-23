@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fluent_hands/core/helper/app_assets.dart';
 import 'package:fluent_hands/core/helper/app_strings.dart';
 import 'package:fluent_hands/core/theming/text_styles.dart';
@@ -34,8 +35,8 @@ class _SignUpState extends State<SignUp> {
               AwesomeDialog(
                 context: context,
                 dialogType: DialogType.success,
-                title: "Done",
-                desc: state.successMessage,
+                title: "Done".tr(),
+                desc: state.successMessage.tr(),
                 btnOkOnPress: () {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
@@ -48,8 +49,8 @@ class _SignUpState extends State<SignUp> {
               AwesomeDialog(
                 context: context,
                 dialogType: DialogType.error,
-                title: "Error",
-                desc: state.errormessage,
+                title: "Error".tr(),
+                desc: state.errormessage.tr(),
               ).show();
             }
           },
@@ -62,7 +63,7 @@ class _SignUpState extends State<SignUp> {
                   children: [
                     const Gap(64),
                     Text(
-                      AppStrings.signUp,
+                      AppStrings.signUp.tr(),
                       style: TextStyles.bold24BlueBerry,
                       textAlign: TextAlign.center,
                     ),
@@ -79,7 +80,7 @@ class _SignUpState extends State<SignUp> {
                                   .read<SignUpCubit>()
                                   .signUpWithEmailAndPassword(context);
                             },
-                            text: AppStrings.signUp,
+                            text: AppStrings.signUp.tr(),
                           ),
                     const Gap(16),
                     const AlreadyHave(),

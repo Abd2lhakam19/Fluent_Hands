@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -5,6 +6,7 @@ import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../../core/widgets/button_widget.dart';
 
+// ignore: must_be_immutable
 class TopScreen extends StatelessWidget {
   TopScreen(
       {super.key,
@@ -73,7 +75,7 @@ class TopScreen extends StatelessWidget {
               backGroundColor: AppColors.blueColor,
               borderRadius: BorderRadius.circular(100),
               onPressed: onPressed,
-              text: "Start",
+              text: 'start'.tr(),
               textStyle: TextStyles.bold14BlueBerry.copyWith(
                 fontSize: 12.sp,
                 color: Colors.white,
