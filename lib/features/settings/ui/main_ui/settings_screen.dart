@@ -65,93 +65,69 @@ class SettingsScreen extends StatelessWidget {
                               context: context,
                               builder: (context) {
                                 return SizedBox(
-                                  height: 200.h,
+                                  height: 150.h,
                                   width: MediaQuery.of(context).size.width,
                                   child: Padding(
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 15.w, vertical: 25.h),
                                     child: Column(
-                                      //  mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          'choose_language'.tr(),
-                                          style: TextStyles.medium18BlueBerry
-                                              .copyWith(
-                                            color: AppColors.blueColor,
-                                            fontSize: 24.sp,
-                                          ),
+                                        TextButton(
+                                          style: LocalizationChecker.isArabic(
+                                                  context)
+                                              ? TextButton.styleFrom(
+                                                  backgroundColor:
+                                                      AppColors.blueColor,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      12,
+                                                    ),
+                                                  ),
+                                                  minimumSize: Size(90.w, 40.h),
+                                                  foregroundColor: Colors.white,
+                                                )
+                                              : null,
+                                          onPressed: () {
+                                            EasyLocalization.of(context)!
+                                                .setLocale(
+                                                    const Locale('ar', 'AE'));
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text('arabic'.tr(),
+                                              style:
+                                                  TextStyles.medium16BlueBerry),
                                         ),
                                         SizedBox(
-                                          height: 40.h,
+                                          width: 16.w,
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            TextButton(
-                                              style: LocalizationChecker
-                                                      .isArabic(context)
-                                                  ? TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          AppColors.blueColor,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                          12,
-                                                        ),
-                                                      ),
-                                                      minimumSize:
-                                                          Size(90.w, 40.h),
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                    )
-                                                  : null,
-                                              onPressed: () {
-                                                EasyLocalization.of(context)!
-                                                    .setLocale(const Locale(
-                                                        'ar', 'AE'));
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text('arabic'.tr(),
-                                                  style:
-                                                      TextStyles.medium24Black),
-                                            ),
-                                            SizedBox(
-                                              width: 16.w,
-                                            ),
-                                            TextButton(
-                                              style: LocalizationChecker
-                                                      .isEnglish(context)
-                                                  ? TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          AppColors.blueColor,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                          12,
-                                                        ),
-                                                      ),
-                                                      minimumSize:
-                                                          Size(90.w, 40.h),
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                    )
-                                                  : null,
-                                              onPressed: () {
-                                                EasyLocalization.of(context)!
-                                                    .setLocale(const Locale(
-                                                        'en', 'US'));
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text('english'.tr(),
-                                                  style:
-                                                      TextStyles.medium24Black),
-                                            ),
-                                          ],
+                                        TextButton(
+                                          style: LocalizationChecker.isEnglish(
+                                                  context)
+                                              ? TextButton.styleFrom(
+                                                  backgroundColor:
+                                                      AppColors.blueColor,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      12,
+                                                    ),
+                                                  ),
+                                                  minimumSize: Size(90.w, 40.h),
+                                                  foregroundColor: Colors.white,
+                                                )
+                                              : null,
+                                          onPressed: () {
+                                            EasyLocalization.of(context)!
+                                                .setLocale(
+                                                    const Locale('en', 'US'));
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text('english'.tr(),
+                                              style:
+                                                  TextStyles.medium16BlueBerry),
                                         ),
                                       ],
                                     ),

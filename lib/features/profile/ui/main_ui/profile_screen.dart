@@ -61,7 +61,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               CircleAvatar(
                 radius: 120.r,
-                backgroundImage: NetworkImage(img),
+                backgroundImage: NetworkImage(
+                    FirebaseAuth.instance.currentUser!.photoURL ?? ""),
               ),
               SizedBox(
                 height: 18.h,
@@ -75,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 2.h,
               ),
               Text(
-                "@User_Name",
+                "@${FirebaseAuth.instance.currentUser!.displayName ?? "user_name"}",
                 style: TextStyles.medium24Black.copyWith(
                   fontSize: 16.sp,
                   color: const Color(0xff9E9E9E),
