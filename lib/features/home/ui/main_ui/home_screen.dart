@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       LevelWidget(
                         num: "1",
-                        lessons: 22,
+                        lessons: 38,
                         def: 'easy'.tr(),
                         level: 'level_one'.tr(),
                       ),
@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       LevelWidget(
                         num: "2",
-                        lessons: 22,
+                        lessons: 4,
                         def: 'medium'.tr(),
                         level: 'level_two'.tr(),
                       ),
@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       LevelWidget(
                         num: "3",
-                        lessons: 22,
+                        lessons: 4,
                         def: 'hard'.tr(),
                         level: 'level_three'.tr(),
                       ),
