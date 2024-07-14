@@ -6,7 +6,6 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../../../../core/helper/font_weight_helper.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../../core/widgets/button_widget.dart';
 
 class CurrentLevel extends StatelessWidget {
   const CurrentLevel({super.key});
@@ -40,10 +39,10 @@ class CurrentLevel extends StatelessWidget {
                         radius: 36,
                         lineWidth: 6,
                         progressColor: AppColors.blueColor,
-                        percent: 0,
+                        percent: 37 / 100,
                         reverse: true,
                         center: Text(
-                          "0 %",
+                          "37 %",
                           style: TextStyles.medium24Black.copyWith(
                               color: AppColors.blueColor,
                               fontSize: 18.sp,
@@ -86,17 +85,24 @@ class CurrentLevel extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 24.h,
+                  height: 45.h,
                 ),
-                ButtonWidget(
-                  onPressed: () {},
-                  text: "continue_studying".tr(),
-                  backGroundColor: AppColors.blueColor,
-                  height: 44.h,
-                  borderRadius: BorderRadius.circular(20),
-                  width: 295.w,
-                  textStyle: TextStyles.medium24Black
-                      .copyWith(color: Colors.white, fontSize: 14.sp),
+                // ButtonWidget(
+                //   onPressed: () {},
+                //   text: "continue_studying".tr(),
+                //   backGroundColor: AppColors.blueColor,
+                //   height: 44.h,
+                //   borderRadius: BorderRadius.circular(20),
+                //   width: 295.w,
+                //   textStyle: TextStyles.medium24Black
+                //       .copyWith(color: Colors.white, fontSize: 14.sp),
+                // ),
+                Text(
+                  "Keep pushing. You got this!",
+                  style: TextStyles.medium24Black.copyWith(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeightHelper.semiBold,
+                  ),
                 ),
               ],
             ),

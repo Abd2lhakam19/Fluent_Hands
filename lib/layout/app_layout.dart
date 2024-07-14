@@ -16,7 +16,7 @@ class AppLayout extends StatefulWidget {
 class _AppLayoutState extends State<AppLayout> {
   int selectedIndex = 0;
   List<Widget> screens = [
-    const HomeScreen(),
+    HomeScreen(),
     const SettingsScreen(),
     BlocProvider(
       create: (_) => SignInCubit(),

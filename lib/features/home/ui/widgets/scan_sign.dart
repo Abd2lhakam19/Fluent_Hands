@@ -65,7 +65,7 @@ class _ScanSignState extends State<ScanSign> {
   bool flashed = false;
   @override
   void initState() {
-    controller = CameraController(cameras![0], ResolutionPreset.medium);
+    controller = CameraController(cameras![0], ResolutionPreset.low);
     controller.initialize().then((_) {
       if (!mounted) {
         return;
@@ -87,7 +87,7 @@ class _ScanSignState extends State<ScanSign> {
     await controller.dispose();
     selectedCameraIndex = (selectedCameraIndex + 1) % cameras!.length;
     controller =
-        CameraController(cameras![selectedCameraIndex], ResolutionPreset.high);
+        CameraController(cameras![selectedCameraIndex], ResolutionPreset.low);
     controller.initialize().then((value) {
       if (!mounted) {
         return;

@@ -78,4 +78,18 @@ class HomeCubit extends Cubit<HomeStates> {
       ),
     );
   }
+
+  List<dynamic> data = [];
+  getLevelsData(String endPoint) async {
+    data = [];
+    emit(LoadingDataState());
+    try {
+      var response = await dio.get("http://arslapp.runasp.net/api/$endPoint");
+
+      emit(SuccessDataState());
+      data = response.data["listSuccess"];
+    } catch (e) {
+      emit(FailureDataState());
+    }
+  }
 }

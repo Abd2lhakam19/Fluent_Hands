@@ -1,12 +1,16 @@
+import 'dart:async';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fluent_hands/core/theming/app_colors.dart';
 import 'package:fluent_hands/features/home/cubit/home_cubit.dart';
 import 'package:fluent_hands/features/home/cubit/home_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../../core/api/dio_consumer.dart';
@@ -27,6 +31,7 @@ class FullTextScan extends StatefulWidget {
 
 class _FullTextScanState extends State<FullTextScan> {
   late CameraController controller;
+  FlutterTts flutterTts = FlutterTts();
   HomeCubit homeCubit =
       HomeCubit(homeRepo: HomeRepo(api: DioConsumer(dio: Dio())));
   late Future<void> initializeControllerFuture;
@@ -34,16 +39,66 @@ class _FullTextScanState extends State<FullTextScan> {
   String? videoPath;
   XFile? videoFile;
   int selectedCameraIndex = 0;
+  bool isClicked = false;
+  int _counter = 3;
+  late Timer _timer;
+  void _startTimer() {
+    if (_counter != 5) {
+      isClicked = true;
+    }
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_counter > 1) {
+          _counter--;
+        } else {
+          _counter = 1;
+          _timer.cancel();
+          isClicked = false;
+        }
+      });
+    });
+  }
+
   @override
   void initState() {
-    controller = CameraController(cameras![0], ResolutionPreset.high);
+    controller = CameraController(cameras![0], ResolutionPreset.low);
     initializeControllerFuture = controller.initialize();
+    flutterTts.getVoices.then((value) {
+      List<Map> voices = List<Map>.from(value);
+      voices.where((voice) => voice["name"].contains("ar")).toList();
+      setVoice(voices.first);
+    });
     super.initState();
+  }
+
+  void initTTS() {
+    flutterTts.getVoices.then((data) {
+      try {
+        List<Map> voices = List<Map>.from(data);
+        setState(() {
+          voices =
+              voices.where((voice) => voice["name"].contains("ar")).toList();
+
+          setVoice(voices.first);
+        });
+      } catch (e) {
+        print(e);
+      }
+    });
+  }
+
+  void setVoice(Map voice) {
+    flutterTts.setVoice({"name": voice["name"], "locale": voice["locale"]});
+  }
+
+  speak(String text) async {
+    await flutterTts.speak(text);
   }
 
   @override
   void dispose() {
     controller.dispose();
+    _timer.cancel();
     super.dispose();
   }
 
@@ -53,7 +108,7 @@ class _FullTextScanState extends State<FullTextScan> {
     await controller.dispose();
     selectedCameraIndex = (selectedCameraIndex + 1) % cameras!.length;
     controller =
-        CameraController(cameras![selectedCameraIndex], ResolutionPreset.high);
+        CameraController(cameras![selectedCameraIndex], ResolutionPreset.low);
     controller.initialize().then((value) {
       if (!mounted) {
         return;
@@ -66,7 +121,9 @@ class _FullTextScanState extends State<FullTextScan> {
     if (!controller.value.isInitialized) {
       return;
     }
+    _startTimer();
 
+    await Future.delayed(const Duration(seconds: 3));
     final directory = await getTemporaryDirectory();
     final filePath =
         '${directory.path}/${DateTime.now().millisecondsSinceEpoch}.mp4';
@@ -75,11 +132,15 @@ class _FullTextScanState extends State<FullTextScan> {
       await controller.startVideoRecording();
       setState(() {
         isRecording = true;
+        _counter = 5;
+        _startTimer();
         videoPath = filePath;
       });
     } catch (e) {
       print(e);
     }
+    await Future.delayed(const Duration(seconds: 5));
+    stopRecording();
   }
 
   Future<void> stopRecording() async {
@@ -91,6 +152,7 @@ class _FullTextScanState extends State<FullTextScan> {
       videoFile = await controller.stopVideoRecording();
       setState(() {
         isRecording = false;
+        _counter = 3;
         if (videoFile != null) {
           homeCubit.videoFile = videoFile;
           homeCubit.videoPredict();
@@ -111,8 +173,10 @@ class _FullTextScanState extends State<FullTextScan> {
                   context: context,
                   dialogType: DialogType.success,
                   desc: state.message,
+                  btnOkText: "ok",
                   btnOkOnPress: () {})
               .show();
+          speak(state.message);
         } else if (state is SuccessRecordingState &&
             widget.training == true &&
             widget.word != null) {
@@ -151,6 +215,14 @@ class _FullTextScanState extends State<FullTextScan> {
               style: TextStyles.medium24Black.copyWith(
                   color: Colors.white, fontWeight: FontWeightHelper.semiBold),
             ),
+            leading: Padding(
+              padding: EdgeInsets.only(left: 20.w),
+              child: Text(
+                isClicked ? _counter.toString() : "",
+                style: TextStyles.medium24Black.copyWith(
+                    color: Colors.white, fontWeight: FontWeightHelper.semiBold),
+              ),
+            ),
           ),
           body: FutureBuilder<void>(
               future: initializeControllerFuture,
@@ -158,6 +230,7 @@ class _FullTextScanState extends State<FullTextScan> {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return Stack(
                     children: [
+                      // const Positioned(child: Text("3")),
                       Positioned.fill(child: CameraPreview(controller)),
                       Positioned(
                         bottom: 50.h,
@@ -187,11 +260,20 @@ class _FullTextScanState extends State<FullTextScan> {
                               width: 50.w,
                             ),
                             FloatingActionButton(
-                              backgroundColor: Colors.red,
-                              onPressed:
-                                  isRecording ? stopRecording : startRecording,
-                              child: Icon(
-                                  isRecording ? Icons.stop : Icons.video_call),
+                              backgroundColor: AppColors.blueColor,
+                              onPressed: startRecording,
+                              child: isRecording
+                                  ? Text(
+                                      _counter.toString(),
+                                      style: TextStyles.medium24Black.copyWith(
+                                          color: Colors.white,
+                                          fontWeight:
+                                              FontWeightHelper.semiBold),
+                                    )
+                                  : const Icon(
+                                      Icons.video_call,
+                                      color: Colors.white,
+                                    ),
                             ),
                             SizedBox(
                               width: 50.w,

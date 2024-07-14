@@ -4,7 +4,8 @@ class EndPoints {
   static String twitterApiKey = "fRhu55hab49mgIdgvoil5z4KN";
   static String twitterApiSecretKey =
           "jLlsh1MtQJPENNXCC5pzrqJJoyRCIEQCAjntl5SEDVAVErsz2g",
-      modelBaseUrl = "http://localhost:5000",
+      modelBaseUrl =
+          "https://5000-01j1yt8sz0172czjw396f92bpt.cloudspaces.litng.ai",
       predict = "/recognize",
       videoPredict = "/classify_video";
   static String basicAuth =

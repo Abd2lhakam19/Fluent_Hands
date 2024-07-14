@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => ContributeWithUs(),
+                              builder: (context) => const ContributeWithUs(),
                             ),
                           );
                         },
@@ -122,24 +122,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         lessons: 38,
                         def: 'easy'.tr(),
                         level: 'level_one'.tr(),
+                        endPoint: "LearningLevel1/getallLevel1Recoreds",
                       ),
                       SizedBox(
                         width: 17.w,
                       ),
                       LevelWidget(
                         num: "2",
-                        lessons: 4,
+                        lessons: 27,
                         def: 'medium'.tr(),
                         level: 'level_two'.tr(),
+                        endPoint: "LearningLevel2/getallLevel2Recoreds",
                       ),
                       SizedBox(
                         width: 17.w,
                       ),
                       LevelWidget(
                         num: "3",
-                        lessons: 4,
+                        lessons: 32,
                         def: 'hard'.tr(),
                         level: 'level_three'.tr(),
+                        endPoint: "LearningLevel3/getallLevel3Recoreds",
                       ),
                     ],
                   ),

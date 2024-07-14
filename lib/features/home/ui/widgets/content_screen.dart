@@ -1,7 +1,12 @@
+import 'package:fluent_hands/core/theming/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class ContentScreen extends StatelessWidget {
-  const ContentScreen({super.key});
+  ContentScreen(
+      {super.key, required this.word, required this.des, required this.img});
+  String word;
+  String des;
+  String img;
 
   @override
   Widget build(BuildContext context) {
@@ -11,21 +16,27 @@ class ContentScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
+          SizedBox(
             height: 300,
             width: double.infinity,
-            child: Image.asset(
-              'assets/images/letter_one1.png',
+            child: Image.network(
+              "http://arslapp.runasp.net$img",
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text("أ", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),),
+          Text(
+            word,
+            style: TextStyles.bold24BlueBerry,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Text("ارفع يدك اليمنى، بحيث تكون راحة يدك مفتوحة وموجهة نحو الخارج. حرك يدك اليمنى من الأسفل إلى الأعلى وهي مقبوضة, وكأنك تشير إلى شروق الشمس. ثم ارفع الابهام والسبابة والوسطى وقم بثني الاخرين ثم ضعهم على فمك وكأنك تأخذ شيئا من فمك ثم انزل بيدك الى الأسفل وهي في نفس الوضع."
+            child: Text(
+              des,
+              style: TextStyles.regular16BlueBerry,
+              textAlign: TextAlign.center,
             ),
           ),
         ],

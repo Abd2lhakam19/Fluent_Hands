@@ -18,3 +18,9 @@ class SuccessRecordingState extends HomeStates {
 class FailureRecordingState extends HomeStates {}
 
 class LoadingRecordingState extends HomeStates {}
+
+class SuccessDataState extends HomeStates {}
+
+class FailureDataState extends HomeStates {}
+
+class LoadingDataState extends HomeStates {}
